@@ -1,0 +1,11 @@
+*.exe
+*.dll
+.vs
+bin/
+obj/
+*.user
+Core/obj/
+Core/bin/
+Backend/obj/
+Backend/bin/
+.idea/
