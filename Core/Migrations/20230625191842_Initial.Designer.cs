@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20230622090628_AlterTableDishAlterColumnImagePathVarcharNull")]
-    partial class AlterTableDishAlterColumnImagePathVarcharNull
+    [Migration("20230625191842_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(false)
@@ -41,6 +41,10 @@ namespace Core.Migrations
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DiscountPercentage")
                         .HasColumnType("int");
@@ -56,6 +60,10 @@ namespace Core.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("PassportSeries")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -78,6 +86,13 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -98,10 +113,10 @@ namespace Core.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<byte[]>("PassportSeries")
+                    b.Property<string>("PassportSeries")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("varbinary(300)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -262,6 +277,23 @@ namespace Core.Migrations
                     b.ToTable("Order", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Domain.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
             modelBuilder.Entity("Core.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -282,13 +314,24 @@ namespace Core.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("Core.Domain.DeliveryMan", b =>
@@ -354,6 +397,21 @@ namespace Core.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("DeliveryMan");
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.HasOne("Core.Domain.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Domain.Client", b =>

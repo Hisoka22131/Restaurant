@@ -33,6 +33,10 @@ public class DeliveryManService : IDeliveryManService
         entity.LastName = dto.LastName;
         entity.PhoneNumber = dto.PhoneNumber;
         entity.City = dto.City;
+        entity.Address = dto.Address;
+        entity.Birthday = dto.Birthday;
+        entity.PassportSeries = dto.PassportSeries;
+        
         DeliveryManRepository.InsertOrUpdate(entity);
         _unitOfWork.Save();
     }
