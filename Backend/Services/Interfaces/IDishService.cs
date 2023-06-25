@@ -8,6 +8,6 @@ namespace Backend.Services.Interfaces;
 
 public interface IDishService : IBaseService<Dish, DishDto>
 {
-    void SaveImage(IFormFile imageFile);
+    void SaveImage(IFormFile imageFile, int id);
     IActionResult GetImage(int id);
 }

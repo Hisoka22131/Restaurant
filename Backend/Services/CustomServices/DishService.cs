@@ -46,12 +46,11 @@ public class DishService : IDishService
 
     public void PostDelete(int id)
     {
-        var entity = _dishRepository.GetDish(id);
-        _dishRepository.Remove(entity);
+        _dishRepository.Remove(_dishRepository.GetDish(id));
         _unitOfWork.Save();
     }
 
-    public void SaveImage(IFormFile imageFile)
+    public void SaveImage(IFormFile imageFile, int id)
     {
         var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images");
 
@@ -66,12 +65,12 @@ public class DishService : IDishService
         using var stream = new FileStream(filePath, FileMode.Create);
         imageFile.CopyTo(stream);
         var relativeImagePath = Path.Combine("images", fileName);
-        var dish = _dishRepository.GetDish(2);
+        var dish = _dishRepository.GetDish(id);
         dish.ImagePath = relativeImagePath;
         _unitOfWork.Save();
     }
 
-    public IActionResult  GetImage(int id)
+    public IActionResult GetImage(int id)
     {
         var dish = _dishRepository.GetDish(id);
         if (dish == null) throw new ArgumentException(nameof(dish));

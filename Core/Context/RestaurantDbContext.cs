@@ -9,8 +9,12 @@ namespace Core.Context;
 
 public partial class RestaurantDbContext : DbContext
 {
+
+    private const string myComputer = "DESKTOP-467EEFG";
+    private const string workComputer = ".\\SQLEXPRESS";
+    
     private const string workDB =
-            "Server=DESKTOP-467EEFG; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
+            $"Server={myComputer}; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
 
         public RestaurantDbContext()
         {

@@ -35,7 +35,7 @@ public class DishController : ControllerBase
 
     [HttpPost]
     [Route("save-dish-image")]
-    public void SaveImage(IFormFile imageFile) => _dishService.SaveImage(imageFile);
+    public void SaveImage(IFormFile imageFile, int id) => _dishService.SaveImage(imageFile, id);
     
     [HttpGet]
     [Route("get-dish-image/{id:int}")]
