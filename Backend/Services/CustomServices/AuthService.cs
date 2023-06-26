@@ -35,7 +35,7 @@ public class AuthService : IAuthService
 
         var response = new LoginResponseDto()
         {
-            UserName = user.UserName,
+            Email = user.Email,
             Token = JwtHelper.CreateJwt(user, _configuration)
         };
 
@@ -51,7 +51,6 @@ public class AuthService : IAuthService
         var user = new User
         {
             Email = dto.Email,
-            UserName = dto.Name
         };
 
         UserRepository.Register(user, dto.Password);

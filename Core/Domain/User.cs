@@ -4,11 +4,16 @@ namespace Core.Domain;
 
 public class User : EntityBase
 {
+    public User()
+    {
+        Roles = new HashSet<Role>();
+    }
+
     public string Email { get; set; }
     
     public byte[] Password { get; set; }
     
     public byte[] PasswordKey { get; set; }
-    
-    public string UserName { get; set; }
+
+    public ICollection<Role> Roles { get; set; }
 }

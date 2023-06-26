@@ -12,5 +12,5 @@ public class DeliveryManRepository : GenericRepository<DeliveryMan>, IDeliveryMa
     }
 
     public DeliveryMan GetDeliveryMan(int id) =>
-        GetEntity(c => c.Id == id, c => c.District, c => c.DeliveryManVacations, c => c.Orders);
+        GetEntity(c => c.Id == id, c => c.District, c => c.DeliveryManVacations, c => c.Orders, c => c.User);
 }
