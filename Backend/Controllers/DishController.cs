@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Backend.Dto.Dish;
 using Backend.Services.Interfaces;
+using Core.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,17 +28,21 @@ public class DishController : ControllerBase
 
     [HttpPost]
     [Route("post-dish")]
+    [Authorize(Roles = Role.Admin)]
     public void PostDish(DishDto dto) => _dishService.PostEntity(dto);
 
     [HttpDelete]
     [Route("delete-dish")]
+    [Authorize(Roles = Role.Admin)]
     public void DeleteDish(int id) => _dishService.PostDelete(id);
 
     [HttpPost]
     [Route("save-dish-image")]
+    [Authorize(Roles = Role.Admin)]
     public void SaveImage(IFormFile imageFile, int id) => _dishService.SaveImage(imageFile, id);
     
     [HttpGet]
     [Route("get-dish-image/{id:int}")]
+    [Authorize(Roles = Role.Admin)]
     public IActionResult GetImage(int id) => _dishService.GetImage(id);
 }
