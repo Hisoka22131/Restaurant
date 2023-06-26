@@ -23,7 +23,7 @@ public class UserRepository : GenericRepository<User>, IUserRepository
 
     public async Task<User?> Authenticate(string email, string password)
     {
-        var user = GetEntities().FirstOrDefault(q => q.Email == email);
+        var user = GetEntities(q => q.Roles).FirstOrDefault(q => q.Email == email);
         if (user?.PasswordKey == null) return null;
 
         return !MatchPasswordHash(password,  user.Password, user.PasswordKey) ? null : user;

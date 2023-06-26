@@ -11,6 +11,6 @@ public class ClientRepository : GenericRepository<Client> , IClientRepository
     {
     }
     
-    public Client GetClient(int id) => GetEntity(c => c.Id == id, c => c.Orders);
+    public Client GetClient(int id) => GetEntity(c => c.Id == id, c => c.Orders, c => c.User);
 
 }

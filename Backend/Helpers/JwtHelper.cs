@@ -16,11 +16,12 @@ public static class JwtHelper
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
-        var claims = new Claim[]
+        var claims = new List<Claim>()
         {
             new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
+        claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
 
         var signingCredetials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 

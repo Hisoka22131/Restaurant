@@ -13,7 +13,7 @@ public partial class RestaurantDbContext : DbContext
     private const string workComputer = ".\\SQLEXPRESS";
 
     private const string workDB =
-        $"Server={myComputer}; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
+        $"Server={workComputer}; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
 
     public RestaurantDbContext()
     {

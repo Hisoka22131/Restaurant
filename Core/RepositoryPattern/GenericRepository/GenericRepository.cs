@@ -72,6 +72,10 @@ namespace Core.RepositoryPattern.GenericRepository;
         
         public virtual IEnumerable<TEntity> GetEntities() => _dbSet.ToList();
 
+        public IEnumerable<TEntity> GetEntities(params Expression<Func<TEntity, object>>[] includes)
+            => includes.Aggregate(_dbSet.Where(q => true), (current, includeProperty) => current.Include(includeProperty));
+        
+
         protected TEntity GetEntity(int? id) => _context.Find<TEntity>(id);
         
         protected TEntity GetEntity(Expression<Func<TEntity, bool>> predicate,
