@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Backend.Dto.Order;
+﻿using Backend.Dto.Order;
 using Backend.Services.Interfaces;
 using Core.Domain;
 using Core.RepositoryPattern.CustomRepository.Interfaces;
-using Core.RepositoryPattern.CustomRepository.Repository;
 using Core.RepositoryPattern.UoF;
 using Mapster;
 
@@ -12,21 +10,28 @@ namespace Backend.Services.CustomServices;
 public class OrderService : IOrderService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private IOrderRepository OrderRepository => _unitOfWork.OrderRepository;
+    private IOrderRepository _orderRepository => _unitOfWork.OrderRepository;
+    private IClientRepository _clientRepository => _unitOfWork.ClientRepository;
 
     public OrderService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public IEnumerable<OrderDto> GetEntities() => OrderRepository.GetEntities().Adapt<IEnumerable<OrderDto>>();
+    public IEnumerable<OrderDto> GetEntities() => _orderRepository.GetEntities().Adapt<IEnumerable<OrderDto>>();
+    
+    public IEnumerable<OrderListDto> Get(int clientId)
+    {
+        var client = _clientRepository.GetClient(clientId);
+        return _orderRepository.GetClientOrders(client).Adapt<IEnumerable<OrderListDto>>();
+    }
 
-    public OrderDto GetEntity(int id) => OrderRepository.GetOrder(id).Adapt<OrderDto>();
+    public OrderDto GetEntity(int id) => _orderRepository.GetOrder(id).Adapt<OrderDto>();
 
     public void PostEntity(OrderDto dto)
     {
         var entity = dto?.Id != null
-            ? OrderRepository.GetOrder(dto.Id)
+            ? _orderRepository.GetOrder(dto.Id)
             : new Order();
 
         entity.Number = dto.Number;
@@ -37,8 +42,8 @@ public class OrderService : IOrderService
 
     public void PostDelete(int id)
     {
-        var entity = OrderRepository.GetOrder(id);
-        OrderRepository.Remove(entity);
+        var entity = _orderRepository.GetOrder(id);
+        _orderRepository.Remove(entity);
         _unitOfWork.Save();
     }
 }

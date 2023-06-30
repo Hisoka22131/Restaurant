@@ -20,6 +20,11 @@ public class OrderController : ControllerBase
     [Authorize(Roles = Role.Admin)]
     public IEnumerable<OrderDto> Get() => _orderService.GetEntities();
 
+    [HttpGet]
+    [Route("get-my orders/{clientId:int}")]
+    [Authorize(Roles = Role.DeliveryManOrClient)]
+    public IEnumerable<OrderListDto> Get(int clientId) => _orderService.Get(clientId);
+
     [HttpPost]
     [Route("get-order/{id:int}")]
     [Authorize(Roles = Role.Admin)]

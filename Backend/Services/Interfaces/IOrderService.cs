@@ -6,4 +6,5 @@ namespace Backend.Services.Interfaces;
 
 public interface IOrderService : IBaseService<Order, OrderDto>
 {
+    IEnumerable<OrderListDto> Get(int clientId);
 }
