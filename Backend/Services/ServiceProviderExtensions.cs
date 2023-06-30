@@ -68,8 +68,8 @@ public static class ServiceProviderExtensions
     {
         return services.AddSwaggerGen(q =>
         {
-            q.SwaggerDoc("v1", new OpenApiInfo { Title = "DemoJwt", Version = "v1" });
-            q.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            q.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurant", Version = "v1" });
+            q.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
             {
                 Description = "JWT Authorization",
                 Name = "Authorization",
