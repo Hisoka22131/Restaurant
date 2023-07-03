@@ -19,9 +19,9 @@ public class DistrictService : IDistrictService
         _unitOfWork = unitOfWork;
     }
 
-    public IEnumerable<DistrictDto> GetEntities() => DistrictRepository.GetEntities().Adapt<IEnumerable<DistrictDto>>();
+    public async Task<IEnumerable<DistrictDto>> GetEntities() => DistrictRepository.GetEntities().Adapt<IEnumerable<DistrictDto>>();
 
-    public DistrictDto GetEntity(int id)
+    public async Task<DistrictDto> GetEntity(int id)
     {
         if (id == 0) throw new ArgumentException("id is not exists");
         var district = DistrictRepository.GetDistrict(id);

@@ -9,9 +9,9 @@ public interface IBaseService<TEntity, TEntityDto>
     where TEntity : EntityBase
     where TEntityDto : EntityDto
 {
-    IEnumerable<TEntityDto> GetEntities();
+    Task<IEnumerable<TEntityDto>> GetEntities();
 
-    TEntityDto GetEntity(int id);
+    Task<TEntityDto> GetEntity(int id);
 
     void PostEntity(TEntityDto dto);
 

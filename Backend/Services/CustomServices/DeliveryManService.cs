@@ -18,10 +18,10 @@ public class DeliveryManService : IDeliveryManService
         _unitOfWork = unitOfWork;
     }
 
-    public IEnumerable<DeliveryManDto> GetEntities() =>
+    public async Task<IEnumerable<DeliveryManDto>> GetEntities() =>
         DeliveryManRepository.GetEntities().Adapt<IEnumerable<DeliveryManDto>>();
 
-    public DeliveryManDto GetEntity(int id) => DeliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
+    public async Task<DeliveryManDto> GetEntity(int id) => DeliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
 
     public void PostEntity(DeliveryManDto dto)
     {

@@ -18,7 +18,7 @@ public class OrderService : IOrderService
         _unitOfWork = unitOfWork;
     }
 
-    public IEnumerable<OrderDto> GetEntities() => _orderRepository.GetEntities().Adapt<IEnumerable<OrderDto>>();
+    public async Task<IEnumerable<OrderDto>> GetEntities() => _orderRepository.GetEntities().Adapt<IEnumerable<OrderDto>>();
     
     public IEnumerable<OrderListDto> Get(int clientId)
     {
@@ -26,7 +26,7 @@ public class OrderService : IOrderService
         return _orderRepository.GetClientOrders(client).Adapt<IEnumerable<OrderListDto>>();
     }
 
-    public OrderDto GetEntity(int id) => _orderRepository.GetOrder(id).Adapt<OrderDto>();
+    public async Task<OrderDto> GetEntity(int id) => _orderRepository.GetOrder(id).Adapt<OrderDto>();
 
     public void PostEntity(OrderDto dto)
     {

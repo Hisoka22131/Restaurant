@@ -19,12 +19,12 @@ public class DistrictController : ControllerBase
     [HttpGet]
     [Route("get-districts")]
     [Authorize(Roles = Role.Admin)]
-    public IEnumerable<DistrictDto> Get() => _districtService.GetEntities();
+    public async Task<IEnumerable<DistrictDto>> Get() => await _districtService.GetEntities();
 
     [HttpPost]
     [Route("get-district/{id:int}")]
     [Authorize(Roles = Role.Admin)]
-    public DistrictDto Get(int id) => _districtService.GetEntity(id);
+    public async Task<DistrictDto> Get(int id) => await _districtService.GetEntity(id);
 
     [HttpPost]
     [Route("send-district")]

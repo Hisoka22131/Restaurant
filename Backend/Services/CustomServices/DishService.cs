@@ -28,9 +28,9 @@ public class DishService : IDishService
         _webHostEnvironment = webHostEnvironment;
     }
 
-    public IEnumerable<DishDto> GetEntities() => _dishRepository.GetEntities().Adapt<IEnumerable<DishDto>>();
+    public async Task<IEnumerable<DishDto>> GetEntities() => _dishRepository.GetEntities().Adapt<IEnumerable<DishDto>>();
 
-    public DishDto GetEntity(int id) => _dishRepository.GetDish(id).Adapt<DishDto>();
+    public async Task<DishDto> GetEntity(int id) => _dishRepository.GetDish(id).Adapt<DishDto>();
 
     public void PostEntity(DishDto dto)
     {
@@ -71,7 +71,7 @@ public class DishService : IDishService
         _unitOfWork.Save();
     }
 
-    public IActionResult GetImage(int id)
+    public async Task<IActionResult> GetImage(int id)
     {
         var dish = _dishRepository.GetDish(id);
         if (dish == null) throw new ArgumentException(nameof(dish));

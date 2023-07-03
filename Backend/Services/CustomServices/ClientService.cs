@@ -16,12 +16,12 @@ public class ClientService : IClientService
     {
         _unitOfWork = unitOfWork;
     }
-    public IEnumerable<ClientDto> GetEntities()
+    public async Task<IEnumerable<ClientDto>> GetEntities()
     {
         throw new NotImplementedException();
     }
 
-    public ClientDto GetEntity(int id)
+    public async Task<ClientDto> GetEntity(int id)
     {
         throw new NotImplementedException();
     }

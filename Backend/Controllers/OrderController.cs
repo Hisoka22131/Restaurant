@@ -18,7 +18,7 @@ public class OrderController : ControllerBase
     [HttpGet]
     [Route("get-orders")]
     [Authorize(Roles = Role.Admin)]
-    public IEnumerable<OrderDto> Get() => _orderService.GetEntities();
+    public async Task<IEnumerable<OrderDto>> Get() => await _orderService.GetEntities();
 
     [HttpGet]
     [Route("get-my orders/{clientId:int}")]
@@ -28,7 +28,7 @@ public class OrderController : ControllerBase
     [HttpPost]
     [Route("get-order/{id:int}")]
     [Authorize(Roles = Role.Admin)]
-    public OrderDto GetEntity(int id) => _orderService.GetEntity(id);
+    public async Task<OrderDto> GetEntity(int id) => await _orderService.GetEntity(id);
 
     [HttpPost]
     [Route("post-order")]
