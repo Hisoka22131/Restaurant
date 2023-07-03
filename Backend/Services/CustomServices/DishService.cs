@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Backend.Dto.Dish;
+using Backend.Helpers;
 using Backend.Services.Base;
 using Backend.Services.Interfaces;
 using Core.Domain;
@@ -27,9 +28,9 @@ public class DishService : IDishService
         _webHostEnvironment = webHostEnvironment;
     }
 
-    public IEnumerable<DishDto> GetEntities() => _dishRepository.GetEntities().Adapt<IEnumerable<DishDto>>();
+    public async Task<IEnumerable<DishDto>> GetEntities() => _dishRepository.GetEntities().Adapt<IEnumerable<DishDto>>();
 
-    public DishDto GetEntity(int id) => _dishRepository.GetDish(id).Adapt<DishDto>();
+    public async Task<DishDto> GetEntity(int id) => _dishRepository.GetDish(id).Adapt<DishDto>();
 
     public void PostEntity(DishDto dto)
     {
@@ -53,15 +54,15 @@ public class DishService : IDishService
     public void SaveImage(IFormFile imageFile, int id)
     {
         var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-
+        
         if (!Directory.Exists(imagePath))
         {
             Directory.CreateDirectory(imagePath);
         }
-
+        
         var fileName = Path.GetFileName(imageFile.FileName);
         var filePath = Path.Combine(imagePath, fileName);
-
+        
         using var stream = new FileStream(filePath, FileMode.Create);
         imageFile.CopyTo(stream);
         var relativeImagePath = Path.Combine("images", fileName);
@@ -70,7 +71,7 @@ public class DishService : IDishService
         _unitOfWork.Save();
     }
 
-    public IActionResult GetImage(int id)
+    public async Task<IActionResult> GetImage(int id)
     {
         var dish = _dishRepository.GetDish(id);
         if (dish == null) throw new ArgumentException(nameof(dish));

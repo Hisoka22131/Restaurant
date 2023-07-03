@@ -7,6 +7,6 @@ namespace Backend.Services.Interfaces;
 
 public interface IAuthService
 {
-    Task<IActionResult> Login(LoginRequestDto request);
-    public Task<IActionResult> Register(UserRegisterDto dto);
+    Task<IActionResult> Login(LoginRequestDto request); 
+    Task<IActionResult> Register(UserRegisterDto dto);
 }

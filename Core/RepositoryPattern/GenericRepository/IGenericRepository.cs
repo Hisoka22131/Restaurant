@@ -18,4 +18,5 @@ public interface IGenericRepository<TEntity> where TEntity : class
     public void InsertOrUpdate(TEntity entity);
     public void InsertOrUpdate(params TEntity[] entities);
     public IEnumerable<TEntity> GetEntities();
+    public IEnumerable<TEntity> GetEntities(params Expression<Func<TEntity, object>>[] includes);
 }

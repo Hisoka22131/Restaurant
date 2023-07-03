@@ -17,14 +17,14 @@ public class DeliveryManController : ControllerBase
     public DeliveryManController(IDeliveryManService deliveryManService) => _deliveryManService = deliveryManService;
 
     [HttpGet]
-    [Route("get-delyverymans")]
-    [Authorize(Roles = Role.AdminOrDeliveryMan)]
-    public IEnumerable<DeliveryManDto> Get() => _deliveryManService.GetEntities();
+    [Route("get-deliverymans")]
+    [Authorize(Roles = Role.DeliveryMan)]
+    public async Task<IEnumerable<DeliveryManDto>> Get() => await _deliveryManService.GetEntities();
 
     [HttpPost]
-    [Route("get-delyveryman")]
-    [Authorize(Roles = Role.AdminOrDeliveryMan)]
-    public DeliveryManDto Get(int id) => _deliveryManService.GetEntity(id);
+    [Route("get-deliveryman")]
+    [Authorize(Roles = Role.DeliveryMan)]
+    public async Task<DeliveryManDto> Get(int id) => await _deliveryManService.GetEntity(id);
 
     [HttpPost]
     [Route("post-deliveryman")]

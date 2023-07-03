@@ -3,9 +3,9 @@
 public partial class Role
 {
     public const string Admin = "Admin";
-    public const string Client = "Client"; 
-    public const string DeliveryMan = "DeliveryMan";
-    public const string AdminOrClient = Admin + "," + Client;
-    public const string AdminOrDeliveryMan = Admin + "," + DeliveryMan;
-    public const string DeliveryManOrClient = Admin + "," + Client + "," + DeliveryMan;
+    private const string _client = "Client";
+    private const string _deliveryMan = "DeliveryMan";
+    public const string Client = Admin + "," + _client;
+    public const string DeliveryMan = Admin + "," + _deliveryMan;
+    public const string DeliveryManOrClient = Admin + "," + _client + "," + _deliveryMan;
 }

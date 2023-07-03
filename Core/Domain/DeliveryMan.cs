@@ -10,7 +10,8 @@ public partial class DeliveryMan : PersonalInfoBase
         Orders = new HashSet<Order>();
         DeliveryManVacations = new HashSet<DeliveryManVacation>();
     }
-
+    
+    public string? ImagePath { get; set; }
     public int DistrictId { get; set; }
     public virtual District District { get; set; }
     public virtual ICollection<Order> Orders { get; set; }

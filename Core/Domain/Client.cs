@@ -10,7 +10,8 @@ public partial class Client : PersonalInfoBase
     {
         Orders = new HashSet<Order>();
     }
-    
+
+    public string? ImagePath { get; set; }
     public int? DiscountPercentage { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } 
