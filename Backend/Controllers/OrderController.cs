@@ -23,7 +23,7 @@ public class OrderController : ControllerBase
     [HttpGet]
     [Route("get-my orders/{clientId:int}")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
-    public IEnumerable<OrderListDto> Get(int clientId) => _orderService.Get(clientId);
+    public async Task<IEnumerable<OrderListDto>> Get(int clientId) => await _orderService.Get(clientId);
 
     [HttpPost]
     [Route("get-order/{id:int}")]

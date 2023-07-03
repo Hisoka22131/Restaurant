@@ -20,7 +20,7 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetEntities() => _orderRepository.GetEntities().Adapt<IEnumerable<OrderDto>>();
     
-    public IEnumerable<OrderListDto> Get(int clientId)
+    public async Task<IEnumerable<OrderListDto>> Get(int clientId)
     {
         var client = _clientRepository.GetClient(clientId);
         return _orderRepository.GetClientOrders(client).Adapt<IEnumerable<OrderListDto>>();
