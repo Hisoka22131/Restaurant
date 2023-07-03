@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Backend.Dto.Dish;
+using Backend.Helpers;
 using Backend.Services.Base;
 using Backend.Services.Interfaces;
 using Core.Domain;
@@ -53,15 +54,15 @@ public class DishService : IDishService
     public void SaveImage(IFormFile imageFile, int id)
     {
         var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-
+        
         if (!Directory.Exists(imagePath))
         {
             Directory.CreateDirectory(imagePath);
         }
-
+        
         var fileName = Path.GetFileName(imageFile.FileName);
         var filePath = Path.Combine(imagePath, fileName);
-
+        
         using var stream = new FileStream(filePath, FileMode.Create);
         imageFile.CopyTo(stream);
         var relativeImagePath = Path.Combine("images", fileName);

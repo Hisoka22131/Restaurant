@@ -10,7 +10,7 @@ Backend/obj/
 Backend/bin/
 .idea/
 # Исключить все файлы с расширениями изображений
-Backend/wwwroot/
+Backend/wwwroot/images/
 *.jpg
 *.jpeg
 *.png
