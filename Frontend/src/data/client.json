@@ -1,0 +1,112 @@
+[
+  {
+    "Id": 1,
+    "DiscountPercentage": 3,
+    "FirstName": "John",
+    "LastName": "Doe",
+    "PhoneNumber": "+1234567890",
+    "Birthday": "1990-05-15",
+    "City": "New York",
+    "Address": "123 Main St",
+    "PassportSeries": "AB1234567"
+  },
+  {
+    "Id": 2,
+    "DiscountPercentage": 8,
+    "FirstName": "Jane",
+    "LastName": "Smith",
+    "PhoneNumber": "+9876543210",
+    "Birthday": "1985-08-27",
+    "City": "Los Angeles",
+    "Address": "456 Elm St",
+    "PassportSeries": "CD9876543"
+  },
+  {
+    "Id": 3,
+    "DiscountPercentage": 5,
+    "FirstName": "Michael",
+    "LastName": "Johnson",
+    "PhoneNumber": "+5555555555",
+    "Birthday": "1992-02-10",
+    "City": "Chicago",
+    "Address": "789 Oak St",
+    "PassportSeries": "EF5432109"
+  },
+  {
+    "Id": 4,
+    "DiscountPercentage": 2,
+    "FirstName": "Emily",
+    "LastName": "Anderson",
+    "PhoneNumber": "+1111111111",
+    "Birthday": "1995-11-02",
+    "City": "San Francisco",
+    "Address": "987 Pine St",
+    "PassportSeries": "GH9876543"
+  },
+  {
+    "Id": 5,
+    "DiscountPercentage": 7,
+    "FirstName": "David",
+    "LastName": "Brown",
+    "PhoneNumber": "+2222222222",
+    "Birthday": "1988-07-20",
+    "City": "Seattle",
+    "Address": "654 Cedar St",
+    "PassportSeries": "IJ7654321"
+  },
+  {
+    "Id": 6,
+    "DiscountPercentage": 1,
+    "FirstName": "Sarah",
+    "LastName": "Taylor",
+    "PhoneNumber": "+3333333333",
+    "Birthday": "1991-04-18",
+    "City": "Boston",
+    "Address": "321 Walnut St",
+    "PassportSeries": "KL5432109"
+  },
+  {
+    "Id": 7,
+    "DiscountPercentage": 9,
+    "FirstName": "Daniel",
+    "LastName": "Wilson",
+    "PhoneNumber": "+4444444444",
+    "Birthday": "1987-09-05",
+    "City": "Miami",
+    "Address": "876 Maple St",
+    "PassportSeries": "MN8765432"
+  },
+  {
+    "Id": 8,
+    "DiscountPercentage": 4,
+    "FirstName": "Olivia",
+    "LastName": "Martinez",
+    "PhoneNumber": "+5555555555",
+    "Birthday": "1994-01-25",
+    "City": "Dallas",
+    "Address": "543 Birch St",
+    "PassportSeries": "OP6543210"
+  },
+  {
+    "Id": 9,
+    "DiscountPercentage": 6,
+    "FirstName": "James",
+    "LastName": "Lopez",
+    "PhoneNumber": "+6666666666",
+    "Birthday": "1989-06-12",
+    "City": "Houston",
+    "Address": "210 Oak St",
+    "PassportSeries": "QR5432109"
+  },
+  {
+    "Id": 10,
+    "DiscountPercentage": 0,
+    "FirstName": "Sophia",
+    "LastName": "Harris",
+    "PhoneNumber": "+7777777777",
+    "Birthday": "1993-03-08",
+    "City": "Atlanta",
+    "Address": "789 Pine St",
+    "PassportSeries": "ST9876543"
+  }
+]

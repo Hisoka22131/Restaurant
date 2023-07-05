@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Name": "District A"
+  },
+  {
+    "Id": 2,
+    "Name": "District B"
+  },
+  {
+    "Id": 3,
+    "Name": "District C"
+  },
+  {
+    "Id": 4,
+    "Name": "District D"
+  },
+  {
+    "Id": 5,
+    "Name": "District E"
+  }
+]

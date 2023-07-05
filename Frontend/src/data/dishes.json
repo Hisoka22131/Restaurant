@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 2,
+    "Name": "Tomato soup"
+  },
+  {
+    "Id": 3,
+    "Name": "Chicken broth"
+  },
+  {
+    "Id": 4,
+    "Name": "Onion soup"
+  },
+  {
+    "Id": 5,
+    "Name": "Chips"
+  },
+  {
+    "Id": 6,
+    "Name": "Nicoise salad"
+  },
+  {
+    "Id": 7,
+    "Name": "Nachos"
+  },
+  {
+    "Id": 8,
+    "Name": "BBQ ribs"
+  },
+  {
+    "Id": 9,
+    "Name": "Pasta Carbonara"
+  },
+  {
+    "Id": 10,
+    "Name": "Roast chicken and potatoes"
+  }
+]
