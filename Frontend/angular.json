@@ -26,7 +26,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "./node_modules/tailwindcss/base.css",
+              "./node_modules/tailwindcss/components.css",
+              "./node_modules/tailwindcss/utilities.css"
             ],
             "scripts": []
           },
@@ -89,7 +91,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "./node_modules/tailwindcss/base.css",
+              "./node_modules/tailwindcss/components.css",
+              "./node_modules/tailwindcss/utilities.css"
             ],
             "scripts": []
           }
