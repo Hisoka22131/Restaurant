@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {IClient} from "../IClient";
 import {ClientService} from "../../services/client.service";
 import {NgForm} from "@angular/forms";
+import {AlertifyService} from "../../services/alertify.service";
 
 @Component({
   selector: 'app-client-detail',
@@ -23,7 +24,11 @@ export class ClientDetailComponent implements OnInit {
     PassportSeries: ""
   };
 
-  constructor(private route: ActivatedRoute, private router: Router, private clientService: ClientService) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private clientService: ClientService,
+              private alertifyService: AlertifyService)
+  {
     //преобразуем в Number '+*'
     this.clientId = +this.route.snapshot.params['id'];
     this.getClient();
@@ -44,6 +49,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   onSubmit(Form: NgForm) {
+    this.alertifyService.message('ewgewgewggegew')
     // return this.http.post(this.baseApiUrl + '/product/CreateProduct', this.productView)
     //   .subscribe(data => console.log(data))
   }

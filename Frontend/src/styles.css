@@ -1,3 +1,11 @@
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+.alertify .ajs-content {
+  max-width: 400px; /* Установите желаемую максимальную ширину */
+  word-wrap: break-word; /* Переносить текст на новую строку при достижении максимальной ширины */
+}
+
 .card-img-wrapper {
   overflow: hidden;
   position: relative;

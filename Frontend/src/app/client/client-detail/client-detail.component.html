@@ -1,60 +1,56 @@
 <div class="row mb-5">
   <div class="col-8">
     <div class="card">
-      <div class="card-header"><h3>Add new product</h3></div>
+      <div class="card-header"><h3>Клиент №{{client.Id}}</h3></div>
       <div class="card-body">
         <form (ngSubmit)="onSubmit(Form)" #Form="ngForm">
           <div>
-            <tabset>
-              <tab heading="Basic info" id="tab1">
-                <div class="form-group col-12">
-                  <label for="FirstName">Имя:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.FirstName" name="firstName"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="LastName">Фамилия:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.LastName" name="lastName"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="passportSeries">Фамилия:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.PassportSeries" name="passportSeries"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="phoneNumber">Номер телефона:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.PhoneNumber" name="phoneNumber"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="birthday">Дата рождения:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.Birthday" name="birthday"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="address">Адрес:</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.Address" name="address"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="city">Город</label>
-                  <input type="text" class="form-control" [(ngModel)]="client.City" name="city"/>
-                </div>
-                <div class="form-group col-12">
-                  <label for="discountPercentage">Скидка:</label>
-                  <input type="number" class="form-control" [(ngModel)]="client.DiscountPercentage" name="discountPercentage"/>
-                </div>
-                <div class="form-group col-12">
-                  <!--              <button [disabled]="Form.invalid" type="submit" class="btn btn-primary">Save</button>-->
-                  <button type="submit" class="btn btn-primary">Save</button>
-                  <button type="reset" class="btn btn-primary m-2">Cancel</button>
-                </div>
-              </tab>
-              <tab heading="Photos" id="tab2"></tab>
-            </tabset>
+            <div class="form-group col-12">
+              <label for="FirstName">Имя:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.FirstName" name="firstName"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="LastName">Фамилия:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.LastName" name="lastName"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="passportSeries">Фамилия:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.PassportSeries" name="passportSeries"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="phoneNumber">Номер телефона:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.PhoneNumber" name="phoneNumber"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="birthday">Дата рождения:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.Birthday" name="birthday"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="address">Адрес:</label>
+              <input type="text" class="form-control" [(ngModel)]="client.Address" name="address"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="city">Город</label>
+              <input type="text" class="form-control" [(ngModel)]="client.City" name="city"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="discountPercentage">Скидка:</label>
+              <input type="number" class="form-control" [(ngModel)]="client.DiscountPercentage"
+                     name="discountPercentage"/>
+            </div>
+            <div class="form-group col-12">
+              <!--              <button [disabled]="Form.invalid" type="submit" class="btn btn-primary">Save</button>-->
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="reset" class="btn btn-primary m-2">Cancel</button>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-3">
     <div class="card-header">
-      Your product preview
+      Предпросмотр
       <div>
         <app-client-card [client]="client"></app-client-card>
       </div>

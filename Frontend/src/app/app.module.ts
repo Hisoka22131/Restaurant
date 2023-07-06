@@ -12,6 +12,7 @@ import { ClientListComponent } from './client/client-list/client-list.component'
 import {ClientService} from "./services/client.service";
 import { ClientCardComponent } from './client/client-card/client-card.component';
 import { ClientDetailComponent } from './client/client-detail/client-detail.component';
+import {AlertifyService} from "./services/alertify.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ClientDetailComponent } from './client/client-detail/client-detail.comp
   ],
   // сервисы
   providers: [
-    ClientService
+    ClientService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })
