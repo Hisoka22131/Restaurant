@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-img-wrapper">
+    <img class="card-img-top" src="assets/images/house.png" />
+    <ul class="list-inline text-center member-icons animate">
+      <li class="list-inline-item">
+        <button class="btn btn-default btn-sm coral" title="Редактировать"><i class="fa-solid fa-pen-to-square"></i></button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-default btn-sm green" title="Подробнее"><i class="fa-solid fa-circle-info"></i></button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body p-2">
+    <h1>{{ client.Id }}</h1>
+    <h2>{{ client.DiscountPercentage }}</h2>
+    <h3>{{ client.FirstName  + ' ' + client.LastName }}</h3>
+    <h3>{{ client.PhoneNumber }}</h3>
+    <h3>{{ client.Birthday }}</h3>
+    <h3>{{ client.City }}</h3>
+    <h3>{{ client.Address }}</h3>
+    <h3>{{ client.PassportSeries }}</h3>
+  </div>
+</div>
