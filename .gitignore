@@ -11,6 +11,9 @@ Backend/bin/
 .idea/
 # Исключить все файлы с расширениями изображений
 Backend/wwwroot/images/
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.angular/
 *.jpg
 *.jpeg
 *.png
