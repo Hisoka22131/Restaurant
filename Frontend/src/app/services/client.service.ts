@@ -30,6 +30,6 @@ export class ClientService {
     return this.http.get<Record<string, any>>(this.testUrl).pipe(
       map((data) => {
         return data[id];
-      }));
+      }))
   }
 }

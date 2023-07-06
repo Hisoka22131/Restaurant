@@ -28,7 +28,8 @@ import { ClientDetailComponent } from './client/client-detail/client-detail.comp
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // TabsModule.forRoot(),
   ],
   // сервисы
   providers: [
