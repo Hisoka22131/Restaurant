@@ -9,12 +9,13 @@ import {IClient} from "../client/IClient";
 })
 export class ClientService {
   baseApiUrl: string = environment.baseApiUrl;
+  testUrl: string = 'data/clients.json';
 
   constructor(private http: HttpClient) {
   }
 
   getAllClients(): Observable<IClient[]> {
-    return this.http.get<Record<string, any>>('data/clients.json').pipe(
+    return this.http.get<Record<string, any>>(this.testUrl).pipe(
       map((data) => {
         const clientsArray: Array<IClient> = [];
         for (const id in data) {
@@ -23,5 +24,12 @@ export class ClientService {
         return clientsArray;
       })
     );
+  }
+
+  getClient(id: number): Observable<IClient> {
+    return this.http.get<Record<string, any>>(this.testUrl).pipe(
+      map((data) => {
+        return data[id];
+      }));
   }
 }

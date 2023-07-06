@@ -11,6 +11,7 @@ import {HomePageComponent} from './home-page/home-page.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import {ClientService} from "./services/client.service";
 import { ClientCardComponent } from './client/client-card/client-card.component';
+import { ClientDetailComponent } from './client/client-detail/client-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClientCardComponent } from './client/client-card/client-card.component'
     NavBarComponent,
     HomePageComponent,
     ClientListComponent,
-    ClientCardComponent
+    ClientCardComponent,
+    ClientDetailComponent
   ],
   imports: [
     BrowserModule,

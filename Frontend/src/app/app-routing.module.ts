@@ -2,11 +2,13 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from "./home-page/home-page.component";
 import {ClientListComponent} from "./client/client-list/client-list.component";
+import {ClientDetailComponent} from "./client/client-detail/client-detail.component";
 
 const routes: Routes = [
   //хом
   {path: '', component: HomePageComponent},
   {path: 'client-list', component: ClientListComponent},
+  {path: 'client-detail/:id', component: ClientDetailComponent},
   //в конце
   {path: '**', component: HomePageComponent}
 ];
