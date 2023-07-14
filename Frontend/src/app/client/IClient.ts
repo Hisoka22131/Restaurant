@@ -1,4 +1,6 @@
-export interface IClient {
+import {IBase} from "../base/IBase";
+
+export interface IClient extends IBase {
   Id: number,
   DiscountPercentage: number,
   FirstName: string,

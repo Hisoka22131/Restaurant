@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {IClient} from "../IClient";
-import {ClientService} from "../../services/client.service";
+import {ClientService} from "../../services/client/client.service";
 import {NgForm} from "@angular/forms";
-import {AlertifyService} from "../../services/alertify.service";
+import {AlertifyService} from "../../services/view/alertify.service";
 
 @Component({
   selector: 'app-client-detail',
@@ -11,6 +11,7 @@ import {AlertifyService} from "../../services/alertify.service";
   styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
+
   public clientId: number;
   public client: IClient = {
     Id: 0,
@@ -24,11 +25,12 @@ export class ClientDetailComponent implements OnInit {
     PassportSeries: ""
   };
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private clientService: ClientService,
-              private alertifyService: AlertifyService)
-  {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private clientService: ClientService,
+    private alertifyService: AlertifyService
+  ) {
     //преобразуем в Number '+*'
     this.clientId = +this.route.snapshot.params['id'];
     this.getClient();
@@ -42,10 +44,10 @@ export class ClientDetailComponent implements OnInit {
       });
   }
 
-  // Получаем клиента, надо будет переписать т к в будущем буду с бэка получать
   getClient() {
-    this.clientService.getAllClients()
-      .subscribe(c => this.client = c.find(q => q.Id === this.clientId) as IClient);
+    this.clientService
+      .getEntity(this.clientId)
+      .subscribe(c => this.client = c);
   }
 
   onSubmit(Form: NgForm) {

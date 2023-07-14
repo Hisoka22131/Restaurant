@@ -9,10 +9,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HomePageComponent} from './home-page/home-page.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
-import {ClientService} from "./services/client.service";
+import {ClientService} from "./services/client/client.service";
 import { ClientCardComponent } from './client/client-card/client-card.component';
 import { ClientDetailComponent } from './client/client-detail/client-detail.component';
-import {AlertifyService} from "./services/alertify.service";
+import {AlertifyService} from "./services/view/alertify.service";
 
 @NgModule({
   declarations: [

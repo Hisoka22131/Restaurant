@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ClientService} from "../../services/client.service";
+import {ClientService} from "../../services/client/client.service";
 import {IClient} from "../IClient";
 
 @Component({
@@ -15,7 +15,7 @@ export class ClientListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientService.getAllClients()
+    this.clientService.getAllEntities()
       .subscribe(data => {
         this.clients = data
       })
