@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-img-wrapper">
+    <img class="card-img-top" src="assets/images/clients/user.png" />
+    <ul class="list-inline text-center member-icons animate">
+      <li class="list-inline-item">
+        <button class="btn btn-default btn-sm coral" title="Редактировать"><i class="fa-solid fa-pen-to-square"></i></button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-default btn-sm green" title="Подробнее"><i class="fa-solid fa-circle-info"></i></button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body p-2">
+    <h3>{{ deliveryMan.FirstName  + ' ' + deliveryMan.LastName }}</h3>
+    <h3>{{ deliveryMan.PhoneNumber }}</h3>
+    <a href="/delivery-man-detail/{{deliveryMan.Id}}" class="btn btn-primary">Подробнее</a>
+  </div>
+</div>

@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export abstract class AbstractService {
 
-  baseApiUrl: string = environment.baseApiUrl;
+  baseApiUrl: string;
 
   abstract getAllEntities(): Observable<IBase[]>
 

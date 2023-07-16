@@ -1,12 +1,12 @@
 import {IBase} from "../base/IBase";
 
-export interface IClient extends IBase {
-  DiscountPercentage: number,
+export interface IDeliveryMan extends IBase {
   FirstName: string,
   LastName: string,
   PhoneNumber: string,
   Birthday: string,
   City: string,
   Address: string,
-  PassportSeries: string
+  PassportSeries: string,
+  DistrictId: number
 }

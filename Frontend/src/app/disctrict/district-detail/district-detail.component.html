@@ -1,0 +1,35 @@
+<div class="row mb-5">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header"><h3>Район №{{dish.Id}}</h3></div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="districtForm">
+          <div>
+            <div class="form-group col-12">
+              <label for="firstName">Название:</label>
+              <input id="firstName" type="text" class="form-control" formControlName="name"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(districtForm.get('name')) }"/>
+              <div>
+                <div class="error-message" *ngIf="districtForm.get('name')?.errors?.['required']">Поле 'Название' должно
+                  быть заполнено
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <button [disabled]="districtForm.invalid" type="submit" class="btn btn-primary">Сохранить</button>
+              <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card-header">
+      Предпросмотр
+      <div>
+        <app-dish-card [dish]="dish"></app-dish-card>
+      </div>
+    </div>
+  </div>
+</div>

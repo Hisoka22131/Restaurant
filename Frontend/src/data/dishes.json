@@ -1,38 +1,56 @@
 [
   {
     "Id": 2,
-    "Name": "Tomato soup"
+    "Name": "Tomato soup",
+    "Type": "Суп",
+    "TaggingDish": 0
   },
   {
     "Id": 3,
-    "Name": "Chicken broth"
+    "Name": "Chicken broth",
+    "Type": "Жаркое",
+    "TaggingDish": 0
   },
   {
     "Id": 4,
-    "Name": "Onion soup"
+    "Name": "Onion soup",
+    "Type": "Суп",
+    "TaggingDish": 0
   },
   {
     "Id": 5,
-    "Name": "Chips"
+    "Name": "Chips",
+    "Type": "Чипсы",
+    "TaggingDish": 0
   },
   {
     "Id": 6,
-    "Name": "Nicoise salad"
+    "Name": "Nicoise salad",
+    "Type": "Салат",
+    "TaggingDish": 0
   },
   {
     "Id": 7,
-    "Name": "Nachos"
+    "Name": "Nachos",
+    "Type": "Чипсы",
+    "TaggingDish": 0
   },
   {
     "Id": 8,
-    "Name": "BBQ ribs"
+    "Name": "BBQ ribs",
+    "Type": "Жаркое",
+    "TaggingDish": 0
   },
   {
     "Id": 9,
-    "Name": "Pasta Carbonara"
+    "Name": "Pasta Carbonara",
+    "Type": "Паста",
+    "TaggingDish": 0
   },
   {
     "Id": 10,
-    "Name": "Roast chicken and potatoes"
+    "Name": "Roast chicken and potatoes",
+    "Type": "Жаркое",
+    "TaggingDish": 0
   }
 ]

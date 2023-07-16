@@ -7,5 +7,5 @@ import {IClient} from "../IClient";
   styleUrls: ['./client-card.component.css']
 })
 export class ClientCardComponent {
-  @Input() client: any
+  @Input() client: IClient
 }

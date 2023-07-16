@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {IClient} from "../IClient";
 import {ClientService} from "../../services/client/client.service";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AlertifyService} from "../../services/view/alertify.service";
+import {environment} from "../../../../environments/environments";
+import {FormService} from "../../services/view/form.service";
 
 @Component({
   selector: 'app-client-detail',
@@ -12,6 +14,7 @@ import {AlertifyService} from "../../services/view/alertify.service";
 })
 export class ClientDetailComponent implements OnInit {
 
+  clientForm: FormGroup;
   public clientId: number;
   public client: IClient = {
     Id: 0,
@@ -29,31 +32,55 @@ export class ClientDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private clientService: ClientService,
-    private alertifyService: AlertifyService
-  ) {
+    private alertifyService: AlertifyService,
+    public formService: FormService) {
     //преобразуем в Number '+*'
     this.clientId = +this.route.snapshot.params['id'];
-    this.getClient();
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
-        //меняем наш id при переходе на другие страницы
-        this.clientId = +params['id']
-      });
+    this.getClient();
+    this.initForm();
   }
 
   getClient() {
     this.clientService
       .getEntity(this.clientId)
-      .subscribe(c => this.client = c);
+      .subscribe(c => {
+        if (c)
+          this.client = c;
+        if (this.clientForm)
+          this.populateForm()
+      });
   }
 
-  onSubmit(Form: NgForm) {
-    this.alertifyService.message('ewgewgewggegew')
-    // return this.http.post(this.baseApiUrl + '/product/CreateProduct', this.productView)
-    //   .subscribe(data => console.log(data))
+  initForm() {
+    this.clientForm = new FormGroup({
+      firstName: new FormControl(this.client.FirstName, Validators.required),
+      lastName: new FormControl(this.client.LastName, Validators.required),
+      phoneNumber: new FormControl(this.client.PhoneNumber, [Validators.required, Validators.minLength(9)]),
+      birthday: new FormControl(this.client.Birthday, Validators.required),
+      city: new FormControl(this.client.City, Validators.required),
+      address: new FormControl(this.client.Address, Validators.required),
+      passportSeries: new FormControl(this.client.PassportSeries, [Validators.required, Validators.minLength(9)]),
+      discountPercentage: new FormControl(this.client.DiscountPercentage, Validators.required)
+    });
   }
 
+  populateForm() {
+    this.clientForm.patchValue({
+      firstName: this.client.FirstName,
+      lastName: this.client.LastName,
+      phoneNumber: this.client.PhoneNumber,
+      birthday: this.client.Birthday,
+      city: this.client.City,
+      address: this.client.Address,
+      passportSeries: this.client.PassportSeries,
+      discountPercentage: this.client.DiscountPercentage
+    });
+  }
+
+  onSubmit() {
+    this.alertifyService.message(JSON.parse(this.clientForm.value.toString()));
+  }
 }
