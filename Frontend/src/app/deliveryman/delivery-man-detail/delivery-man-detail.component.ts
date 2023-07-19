@@ -7,13 +7,15 @@ import {AlertifyService} from "../../services/view/alertify.service";
 import {FormService} from "../../services/view/form.service";
 import {IDeliveryMan} from "../IDeliveryMan";
 import {DeliverymanService} from "../../services/deliveryman/deliveryman.service";
+import {DistrictService} from "../../services/district/district.service";
+import {IDistrict} from "../../disctrict/IDistrict";
 
 @Component({
   selector: 'app-delivery-man-detail',
   templateUrl: './delivery-man-detail.component.html',
   styleUrls: ['./delivery-man-detail.component.css']
 })
-export class DeliveryManDetailComponent implements  OnInit {
+export class DeliveryManDetailComponent implements OnInit {
   deliveryManForm: FormGroup;
   public deliveryManId: number;
   public deliveryMan: IDeliveryMan = {
@@ -28,11 +30,14 @@ export class DeliveryManDetailComponent implements  OnInit {
     PassportSeries: ""
   };
 
+  districts: Array<IDistrict> = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private deliveryManService: DeliverymanService,
     private alertifyService: AlertifyService,
+    private districtService: DistrictService,
     public formService: FormService) {
     //преобразуем в Number '+*'
     this.deliveryManId = +this.route.snapshot.params['id'];
@@ -41,6 +46,7 @@ export class DeliveryManDetailComponent implements  OnInit {
   ngOnInit(): void {
     this.getDeliveryMan();
     this.initForm();
+    this.getDistricts();
   }
 
   getDeliveryMan() {
@@ -51,6 +57,14 @@ export class DeliveryManDetailComponent implements  OnInit {
           this.deliveryMan = c;
         if (this.deliveryManForm)
           this.populateForm()
+      });
+  }
+
+  getDistricts() {
+    this.districtService
+      .getAllEntities()
+      .subscribe(data => {
+        this.districts = data
       });
   }
 
@@ -81,6 +95,6 @@ export class DeliveryManDetailComponent implements  OnInit {
   }
 
   onSubmit() {
-    this.alertifyService.message(JSON.parse(this.deliveryManForm.value.toString()));
+    console.log(this.deliveryManForm.value)
   }
 }

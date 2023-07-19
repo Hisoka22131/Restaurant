@@ -10,7 +10,8 @@
               <input id="firstName" type="text" class="form-control" formControlName="firstName"
                      [ngClass]="{ 'is-invalid': formService.isEmpty(deliveryManForm.get('firstName')) }"/>
               <div>
-                <div class="error-message" *ngIf="deliveryManForm.get('firstName')?.errors?.['required']">Поле 'Имя' должно
+                <div class="error-message" *ngIf="deliveryManForm.get('firstName')?.errors?.['required']">Поле 'Имя'
+                  должно
                   быть заполнено
                 </div>
               </div>
@@ -45,7 +46,8 @@
               <label for="birthday">Дата рождения:</label>
               <input id="birthday" type="date" class="form-control" formControlName="birthday"
                      [ngClass]="{ 'is-invalid': formService.isEmpty(deliveryManForm.get('birthday'))}"/>
-              <div class="error-message" *ngIf="deliveryManForm.get('birthday')?.errors?.['required']">Поле 'Дата рождения'
+              <div class="error-message" *ngIf="deliveryManForm.get('birthday')?.errors?.['required']">Поле 'Дата
+                рождения'
                 должно быть заполнено
               </div>
             </div>
@@ -53,7 +55,8 @@
               <label for="address">Адрес:</label>
               <input id="address" type="text" class="form-control" formControlName="address"
                      [ngClass]="{ 'is-invalid': formService.isEmpty(deliveryManForm.get('address'))}"/>
-              <div class="error-message" *ngIf="deliveryManForm.get('address')?.errors?.['required']">Поле 'Адрес' должно
+              <div class="error-message" *ngIf="deliveryManForm.get('address')?.errors?.['required']">Поле 'Адрес'
+                должно
                 быть заполнено
               </div>
             </div>
@@ -66,12 +69,8 @@
               </div>
             </div>
             <div class="form-group col-12">
-              <label for="city">Район:</label>
-              <input id="districtId" type="text" class="form-control" formControlName="districtId"
-                     [ngClass]="{ 'is-invalid': formService.isEmpty(deliveryManForm.get('districtId'))}"/>
-              <div class="error-message" *ngIf="deliveryManForm.get('city')?.errors?.['required']">Поле 'Район' должно
-                быть заполнено
-              </div>
+              <label>Район:</label>
+              <app-select-box [items]="districts" formControlName="districtId"></app-select-box>
             </div>
             <div class="form-group col-12">
               <button [disabled]="deliveryManForm.invalid" type="submit" class="btn btn-primary">Сохранить</button>

@@ -26,6 +26,7 @@ import { DeliveryManListComponent } from './deliveryman/delivery-man-list/delive
 import { DeliveryManDetailComponent } from './deliveryman/delivery-man-detail/delivery-man-detail.component';
 import { DeliveryManCardComponent } from './deliveryman/delivery-man-card/delivery-man-card.component';
 import {DeliverymanService} from "./services/deliveryman/deliveryman.service";
+import { SelectBoxComponent } from './base/select-box/select-box.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {DeliverymanService} from "./services/deliveryman/deliveryman.service";
     DistrictDetailComponent,
     DeliveryManListComponent,
     DeliveryManDetailComponent,
-    DeliveryManCardComponent
+    DeliveryManCardComponent,
+    SelectBoxComponent
   ],
   imports: [
     BrowserModule,
