@@ -1,7 +1,7 @@
 <div class="row mb-5">
   <div class="col-8">
     <div class="card">
-      <div class="card-header"><h3>Район №{{dish.Id}}</h3></div>
+      <div class="card-header"><h3>Район №{{district.Id}}</h3></div>
       <div class="card-body">
         <form (ngSubmit)="onSubmit()" [formGroup]="districtForm">
           <div>
@@ -28,7 +28,7 @@
     <div class="card-header">
       Предпросмотр
       <div>
-        <app-dish-card [dish]="dish"></app-dish-card>
+        <app-district-card [district]="district"></app-district-card>
       </div>
     </div>
   </div>

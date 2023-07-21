@@ -28,7 +28,7 @@ public static class ServiceProviderExtensions
             .AddScoped<IClientService, ClientService>()
             .AddScoped<IDeliveryManService, DeliveryManService>()
             .AddScoped<IDishService, DishService>()
-            .AddScoped<IOrderService, OrderService>()
+            .AddScoped<IOrderService, DishOrderService>()
             .AddScoped<IAuthService, AuthService>();
     }
 

@@ -17,7 +17,7 @@ export class DistrictDetailComponent {
 
   districtForm: FormGroup;
   public districtId: number;
-  public dish: IDistrict = {
+  public district: IDistrict = {
     Id: 0,
     Name: ""
   };
@@ -42,7 +42,7 @@ export class DistrictDetailComponent {
       .getEntity(this.districtId)
       .subscribe(c => {
         if (c)
-          this.dish = c;
+          this.district = c;
         if (this.districtForm)
           this.populateForm()
       });
@@ -50,13 +50,13 @@ export class DistrictDetailComponent {
 
   initForm() {
     this.districtForm = new FormGroup({
-      name: new FormControl(this.dish.Name, Validators.required)
+      name: new FormControl(this.district.Name, Validators.required)
     });
   }
 
   populateForm() {
     this.districtForm.patchValue({
-      name: this.dish.Name
+      name: this.district.Name
     });
   }
 

@@ -7,13 +7,13 @@ using Mapster;
 
 namespace Backend.Services.CustomServices;
 
-public class OrderService : IOrderService
+public class DishOrderService : IOrderService
 {
     private readonly IUnitOfWork _unitOfWork;
     private IOrderRepository _orderRepository => _unitOfWork.OrderRepository;
     private IClientRepository _clientRepository => _unitOfWork.ClientRepository;
 
-    public OrderService(IUnitOfWork unitOfWork)
+    public DishOrderService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }

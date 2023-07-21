@@ -27,6 +27,10 @@ import { DeliveryManDetailComponent } from './deliveryman/delivery-man-detail/de
 import { DeliveryManCardComponent } from './deliveryman/delivery-man-card/delivery-man-card.component';
 import {DeliverymanService} from "./services/deliveryman/deliveryman.service";
 import { SelectBoxComponent } from './base/select-box/select-box.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
+import {DishOrderService} from "./services/dish-order/dish-order.service";
+import {NgOptimizedImage} from "@angular/common";
+import { CreateOrderTableComponent } from './order/create-order-table/create-order-table.component';
 
 @NgModule({
   declarations: [
@@ -45,23 +49,27 @@ import { SelectBoxComponent } from './base/select-box/select-box.component';
     DeliveryManListComponent,
     DeliveryManDetailComponent,
     DeliveryManCardComponent,
-    SelectBoxComponent
+    SelectBoxComponent,
+    CreateOrderComponent,
+    CreateOrderTableComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    // TabsModule.forRoot(),
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        NgOptimizedImage,
+        // TabsModule.forRoot(),
+    ],
   // сервисы
   providers: [
     ClientService,
     DistrictService,
     DishService,
     DeliverymanService,
+    DishOrderService,
     AlertifyService,
     FormService
   ],

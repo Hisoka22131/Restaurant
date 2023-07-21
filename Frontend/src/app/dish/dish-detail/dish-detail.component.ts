@@ -19,7 +19,8 @@ export class DishDetailComponent implements OnInit {
     Id: 0,
     Name: "",
     Type: "",
-    TaggingDish: 0
+    TaggingDish: 0,
+    Price: 0
   };
 
   constructor(

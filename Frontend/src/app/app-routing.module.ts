@@ -9,6 +9,7 @@ import {DistrictListComponent} from "./disctrict/district-list/district-list.com
 import {DistrictDetailComponent} from "./disctrict/district-detail/district-detail.component";
 import {DeliveryManListComponent} from "./deliveryman/delivery-man-list/delivery-man-list.component";
 import {DeliveryManDetailComponent} from "./deliveryman/delivery-man-detail/delivery-man-detail.component";
+import {CreateOrderComponent} from "./order/create-order/create-order.component";
 
 const routes: Routes = [
   //хом
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'district-detail/:id', component: DistrictDetailComponent},
   {path: 'delivery-man-list', component: DeliveryManListComponent},
   {path: 'delivery-man-detail/:id', component: DeliveryManDetailComponent},
+  {path: 'create-order', component: CreateOrderComponent},
   //в конце
   {path: '**', component: HomePageComponent}
 ];

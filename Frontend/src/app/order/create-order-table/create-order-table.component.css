@@ -1,0 +1,53 @@
+/* Обновленный CSS */
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+
+  /* Растягиваем .card-registration на всю высоту экрана */
+  .card-registration {
+    height: 100%;
+  }
+}
+
+/* Удалить фиксированный padding для .container, чтобы он растянулся на всю ширину экрана */
+.container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Для .row и .col классов добавим класс h-100 для растягивания их на всю высоту */
+.row,
+.col {
+  height: 100%;
+}
+
+/* Обновим стили .col-lg-8 и .col-lg-4, чтобы растянуть их на всю высоту экрана на больших устройствах */
+@media (min-width: 992px) {
+  .col-lg-8 {
+    height: 100%;
+  }
+
+  .col-lg-4 {
+    height: 100%;
+  }
+}
+
+/* Также обновим стили .card-registration-2 на маленьких устройствах */
+@media (max-width: 991px) {
+  .card-registration-2 .bg-grey {
+    border-bottom-left-radius: 0; /* Удаляем левый border-radius */
+  }
+}
+
+/* Добавим высоту 100% для элементов в .card-registration */
+.card-registration .p-5 {
+  height: 100%;
+}
+
+/* Растягиваем .bg-grey на всю высоту на больших устройствах */
+@media (min-width: 992px) {
+  .card-registration-2 .bg-grey {
+    height: 100%;
+  }
+}
