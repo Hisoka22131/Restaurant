@@ -31,6 +31,7 @@ import { CreateOrderComponent } from './order/create-order/create-order.componen
 import {DishOrderService} from "./services/dish-order/dish-order.service";
 import {NgOptimizedImage} from "@angular/common";
 import { CreateOrderTableComponent } from './order/create-order-table/create-order-table.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CreateOrderTableComponent } from './order/create-order-table/create-ord
     DeliveryManCardComponent,
     SelectBoxComponent,
     CreateOrderComponent,
-    CreateOrderTableComponent
+    CreateOrderTableComponent,
+    OrderListComponent
   ],
     imports: [
         BrowserModule,

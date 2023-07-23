@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {DishOrderService} from "../../services/dish-order/dish-order.service";
 import {IDish} from "../IDish";
-import {DishesOrder} from "../../dishes-order/DishesOrder";
+import {DishOrder} from "../../dishes-order/DishOrder";
 
 @Component({
   selector: 'app-dish-card',
@@ -15,13 +15,17 @@ export class DishCardComponent {
   constructor(private dishOrderService: DishOrderService) {
   }
 
-  onAddToOrder(dish: IDish) {
-
-    this.dishOrderService.updateSelectedDishes(dish);
+  onAddToOrder() {
+    if (this.isExistsInOrder()) return;
     this.isAddingToOrder = true;
-    const dishOrder = new DishesOrder();
-    dishOrder.DishesId = dish.Id;
+    const dishOrder = new DishOrder();
+    dishOrder.DishId = this.dish.Id;
     dishOrder.Count = 1;
+    this.dishOrderService.updateSelectedDishes(this.dish);
     this.dishOrderService.updateCurrentOrder(dishOrder);
+  }
+
+  isExistsInOrder(): any {
+    return this.dishOrderService.getCurrentOrder().find(q => q.DishId === this.dish.Id) || this.isAddingToOrder;
   }
 }

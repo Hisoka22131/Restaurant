@@ -1,8 +1,8 @@
 import {IBase} from "../base/IBase";
 
-export class DishesOrder implements IBase{
+export class DishOrder implements IBase{
   Id: number;
-  DishesId: number;
+  DishId: number;
   OrderId?: number;
   Count: number;
 }

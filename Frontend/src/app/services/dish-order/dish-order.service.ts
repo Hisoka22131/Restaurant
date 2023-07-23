@@ -1,30 +1,31 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractService} from "../abstract/abstract.service";
 import {environment} from "../../../../environments/environments";
 import {map, Observable} from "rxjs";
 import {IBase} from "../../base/IBase";
 import {HttpClient} from "@angular/common/http";
-import {DishesOrder} from "../../dishes-order/DishesOrder";
+import {DishOrder} from "../../dishes-order/DishOrder";
 import {IDish} from "../../dish/IDish";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DishOrderService implements  AbstractService {
+export class DishOrderService implements AbstractService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   baseApiUrl: string = environment.baseApiUrl;
 
   //удалить после подключения к бэкенду
   private testOrderUrl: string = 'data/dish-order.json';
-  private currentOrder: Array<DishesOrder>;
+  private currentOrder: Array<DishOrder>;
   private selectedDishes: Array<IDish> = [];
 
-  getAllEntities(): Observable<DishesOrder[]> {
+  getAllEntities(): Observable<DishOrder[]> {
     return this.http.get<Record<string, any>>(this.testOrderUrl).pipe(
       map((data) => {
-        const arr: Array<DishesOrder> = [];
+        const arr: Array<DishOrder> = [];
         for (const id in data) {
           if (data.hasOwnProperty(id)) arr.push(data[id]);
         }
@@ -33,28 +34,47 @@ export class DishOrderService implements  AbstractService {
     );
   }
 
-  getEntity(id: number): Observable<DishesOrder> {
+  getEntity(id: number): Observable<DishOrder> {
     return this.http.get<Record<string, any>>(this.testOrderUrl).pipe(
       map((data) => {
         return data[id];
       }))
   }
 
-  getCurrentOrder(): Array<DishesOrder> {
-    return this.currentOrder || new Array<DishesOrder>();
+  getCurrentOrder(): Array<DishOrder> {
+    return this.currentOrder || new Array<DishOrder>();
   }
 
-  updateCurrentOrder(dishesOrder: DishesOrder) {
+  updateCurrentOrder(dishOrder: DishOrder) {
     if (!this.currentOrder)
-      this.currentOrder = new Array<DishesOrder>();
-    this.currentOrder.push(dishesOrder);
+      this.currentOrder = new Array<DishOrder>();
+    if (this.currentOrder.indexOf(dishOrder) === -1)
+      this.currentOrder.push(dishOrder);
   }
 
-  getSelectedDishes(): Array<IDish>{
-    return this.selectedDishes;
+  getSelectedDishes(): Array<IDish> {
+    return this.selectedDishes || new Array<IDish>();
   }
 
   updateSelectedDishes(dish: IDish) {
-    this.selectedDishes.push(dish);
+    if (!this.selectedDishes)
+      this.selectedDishes = new Array<IDish>();
+    if (this.selectedDishes.indexOf(dish) == -1)
+      this.selectedDishes.push(dish);
+  }
+
+  updateDishOrderCount(id: number, count: number) {
+    let dishOrder = this.currentOrder.find(q => q.DishId === id) as DishOrder;
+    if (dishOrder)
+      dishOrder.Count = count;
+  }
+
+  removeDishOrder(dish: IDish) {
+    if (dish) {
+      let dishOrder = this.currentOrder.find(q => q.DishId === dish.Id) as DishOrder;
+      dishOrder.Count = 0;
+      this.selectedDishes.splice(this.selectedDishes.indexOf(dish), 1);
+      this.currentOrder.splice(this.currentOrder.indexOf(dishOrder), 1);
+    }
   }
 }

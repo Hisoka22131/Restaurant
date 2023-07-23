@@ -1,22 +1,17 @@
 <div class="card">
   <div class="card-img-wrapper">
-    <img class="card-img-top" src="assets/images/clients/user.png" />
-    <ul class="list-inline text-center member-icons animate">
-      <li class="list-inline-item">
-        <button class="btn btn-default btn-sm coral" title="Редактировать"><i class="fa-solid fa-pen-to-square"></i></button>
-      </li>
-      <li class="list-inline-item">
-        <button class="btn btn-default btn-sm green" title="Подробнее"><i class="fa-solid fa-circle-info"></i></button>
-      </li>
-    </ul>
+    <img class="card-img-top" src="assets/images/clients/user.png"/>
   </div>
   <div class="card-body p-2">
     <h4>{{ dish.Name }}</h4>
     <h5>{{ dish.Type }}</h5>
     <h5>{{ dish.TaggingDish }}</h5>
     <div class="col-12">
-      <a href="/dish-detail/{{dish.Id}}" class="btn btn-sm btn-primary">Подробнее</a>
-      <button (click)="onAddToOrder(dish)" class="btn btn-sm btn-success" [disabled]="isAddingToOrder" style="margin-left: 10px">Добавить в заказ</button>
+      <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="/dish-detail/{{dish.Id}}"
+         class="btn btn-sm btn-primary">Подробнее</a>
+      <button (click)="onAddToOrder()" class="btn btn-sm btn-success" [disabled]="isExistsInOrder()"
+              style="margin-left: 10px">Добавить в заказ
+      </button>
     </div>
 
   </div>

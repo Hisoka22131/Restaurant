@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IDish} from "../../dish/IDish";
+import {DishOrderService} from "../../services/dish-order/dish-order.service";
 
 @Component({
   selector: 'app-create-order-table',
@@ -9,9 +10,16 @@ import {IDish} from "../../dish/IDish";
 export class CreateOrderTableComponent {
   @Input() dish: IDish;
 
-  quantity: number = 0;
+  quantity: number = 1;
 
-  updateCount(): void {
-    console.log(this.quantity)
+  constructor(public dishOrderService: DishOrderService) {
+  }
+
+  updateCount(method: "increment" | "decrement"): void {
+    if (method === "increment")
+      this.quantity += 1;
+    else
+      this.quantity -= this.quantity === 1 ? 0 : 1;
+    this.dishOrderService.updateDishOrderCount(this.dish.Id, this.quantity);
   }
 }
