@@ -9,11 +9,11 @@ namespace Core.Context;
 
 public partial class RestaurantDbContext : DbContext
 {
-    private const string myComputer = "DESKTOP-467EEFG";
-    private const string workComputer = ".\\SQLEXPRESS";
+    private const string _myComputer = ".\\";
+    private const string _workComputer = ".\\SQLEXPRESS";
 
-    private const string workDB =
-        $"Server={workComputer}; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
+    private const string _workDB =
+        $"Server={_myComputer}; Database=Restaurant; Trusted_Connection=True; MultipleActiveResultSets=True; TrustServerCertificate=True";
 
     public RestaurantDbContext()
     {
@@ -27,7 +27,7 @@ public partial class RestaurantDbContext : DbContext
     public virtual DbSet<Client> Clients { get; set; }
     public virtual DbSet<DeliveryMan> DeliveryMens { get; set; }
     public virtual DbSet<Dish> Dishes { get; set; }
-    public virtual DbSet<DishesOrder> DishesOrders { get; set; }
+    public virtual DbSet<DishOrder> DishesOrders { get; set; }
     public virtual DbSet<District> Districts { get; set; }
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<User> Users { get; set; }
@@ -36,7 +36,7 @@ public partial class RestaurantDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(workDB);
+            optionsBuilder.UseSqlServer(_workDB);
         }
     }
 
@@ -124,13 +124,13 @@ public partial class RestaurantDbContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<DishesOrder>(entity =>
+        modelBuilder.Entity<DishOrder>(entity =>
         {
-            entity.HasIndex(e => new { e.DishesId, e.OrderId }, "NonClusteredIndex-20230221-095146");
+            entity.HasIndex(e => new { DishesId = e.DishId, e.OrderId }, "NonClusteredIndex-20230221-095146");
 
-            entity.HasOne(d => d.Dishes)
+            entity.HasOne(d => d.Dish)
                 .WithMany(p => p.DishesOrders)
-                .HasForeignKey(d => d.DishesId)
+                .HasForeignKey(d => d.DishId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_DishesOrders_Dishes");
 

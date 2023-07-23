@@ -8,7 +8,7 @@ public partial class Dish : EntityBase
 {
     public Dish()
     {
-        DishesOrders = new HashSet<DishesOrder>();
+        DishesOrders = new HashSet<DishOrder>();
     }
 
     public string Name { get; set; }
@@ -17,5 +17,5 @@ public partial class Dish : EntityBase
         
     public TaggingDish TaggingDish { get; set; }
 
-    public virtual ICollection<DishesOrder> DishesOrders { get; set; }
+    public virtual ICollection<DishOrder> DishesOrders { get; set; }
 }

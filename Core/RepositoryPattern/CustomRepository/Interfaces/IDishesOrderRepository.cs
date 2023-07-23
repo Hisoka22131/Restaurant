@@ -3,7 +3,7 @@ using Core.RepositoryPattern.GenericRepository;
 
 namespace Core.RepositoryPattern.CustomRepository.Interfaces;
 
-public interface IDishesOrderRepository : IGenericRepository<DishesOrder>
+public interface IDishesOrderRepository : IGenericRepository<DishOrder>
 {
-    DishesOrder GetDishesOrder(int id);
+    DishOrder GetDishesOrder(int id);
 }
