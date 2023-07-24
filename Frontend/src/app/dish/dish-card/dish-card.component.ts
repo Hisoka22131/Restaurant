@@ -19,13 +19,13 @@ export class DishCardComponent {
     if (this.isExistsInOrder()) return;
     this.isAddingToOrder = true;
     const dishOrder = new DishOrder();
-    dishOrder.DishId = this.dish.Id;
-    dishOrder.Count = 1;
+    dishOrder.dishId = this.dish.id;
+    dishOrder.count = 1;
     this.dishOrderService.updateSelectedDishes(this.dish);
     this.dishOrderService.updateCurrentOrder(dishOrder);
   }
 
   isExistsInOrder(): any {
-    return this.dishOrderService.getCurrentOrder().find(q => q.DishId === this.dish.Id) || this.isAddingToOrder;
+    return this.dishOrderService.getCurrentOrder().find(q => q.dishId === this.dish.id) || this.isAddingToOrder;
   }
 }

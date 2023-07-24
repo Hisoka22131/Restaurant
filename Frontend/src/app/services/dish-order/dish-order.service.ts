@@ -64,15 +64,15 @@ export class DishOrderService implements AbstractService {
   }
 
   updateDishOrderCount(id: number, count: number) {
-    let dishOrder = this.currentOrder.find(q => q.DishId === id) as DishOrder;
+    let dishOrder = this.currentOrder.find(q => q.dishId === id) as DishOrder;
     if (dishOrder)
-      dishOrder.Count = count;
+      dishOrder.count = count;
   }
 
   removeDishOrder(dish: IDish) {
     if (dish) {
-      let dishOrder = this.currentOrder.find(q => q.DishId === dish.Id) as DishOrder;
-      dishOrder.Count = 0;
+      let dishOrder = this.currentOrder.find(q => q.dishId === dish.id) as DishOrder;
+      dishOrder.count = 0;
       this.selectedDishes.splice(this.selectedDishes.indexOf(dish), 1);
       this.currentOrder.splice(this.currentOrder.indexOf(dishOrder), 1);
     }

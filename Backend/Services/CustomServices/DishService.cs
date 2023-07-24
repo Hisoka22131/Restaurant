@@ -34,7 +34,7 @@ public class DishService : IDishService
 
     public void PostEntity(DishDto dto)
     {
-        var entity = dto?.Id != null
+        var entity = dto?.Id != null && dto?.Id != 0
             ? _dishRepository.GetDish(dto.Id)
             : new Dish();
 

@@ -11,6 +11,7 @@ import {DeliveryManListComponent} from "./deliveryman/delivery-man-list/delivery
 import {DeliveryManDetailComponent} from "./deliveryman/delivery-man-detail/delivery-man-detail.component";
 import {CreateOrderComponent} from "./order/create-order/create-order.component";
 import {OrderListComponent} from "./order/order-list/order-list.component";
+import {LoginFormComponent} from "./login-register/login-form/login-form.component";
 
 const routes: Routes = [
   //хом
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'delivery-man-detail/:id', component: DeliveryManDetailComponent},
   {path: 'create-order', component: CreateOrderComponent},
   {path: 'order-list', component: OrderListComponent},
+  {path: 'login', component: LoginFormComponent},
   //в конце
   {path: '**', component: HomePageComponent}
 ];

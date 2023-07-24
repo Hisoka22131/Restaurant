@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IClient} from "../../client/IClient";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ClientService} from "../../services/client/client.service";
 import {AlertifyService} from "../../services/view/alertify.service";
 import {FormService} from "../../services/view/form.service";
 import {IDeliveryMan} from "../IDeliveryMan";
 import {DeliverymanService} from "../../services/deliveryman/deliveryman.service";
 import {DistrictService} from "../../services/district/district.service";
 import {IDistrict} from "../../disctrict/IDistrict";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-delivery-man-detail',
@@ -19,15 +18,15 @@ export class DeliveryManDetailComponent implements OnInit {
   deliveryManForm: FormGroup;
   public deliveryManId: number;
   public deliveryMan: IDeliveryMan = {
-    Id: 0,
-    DistrictId: 0,
-    FirstName: "",
-    LastName: "",
-    PhoneNumber: "",
-    Birthday: "",
-    City: "",
-    Address: "",
-    PassportSeries: ""
+    id: 0,
+    districtId: 0,
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    birthday: "",
+    city: "",
+    address: "",
+    passportSeries: ""
   };
 
   districts: Array<IDistrict> = [];
@@ -38,7 +37,8 @@ export class DeliveryManDetailComponent implements OnInit {
     private deliveryManService: DeliverymanService,
     private alertifyService: AlertifyService,
     private districtService: DistrictService,
-    public formService: FormService) {
+    public formService: FormService,
+    private datePipe: DatePipe) {
     //преобразуем в Number '+*'
     this.deliveryManId = +this.route.snapshot.params['id'];
   }
@@ -50,13 +50,14 @@ export class DeliveryManDetailComponent implements OnInit {
   }
 
   getDeliveryMan() {
+    if (!this.deliveryManId) return;
     this.deliveryManService
       .getEntity(this.deliveryManId)
       .subscribe(c => {
         if (c)
           this.deliveryMan = c;
         if (this.deliveryManForm)
-          this.populateForm()
+          this.populateForm();
       });
   }
 
@@ -70,31 +71,44 @@ export class DeliveryManDetailComponent implements OnInit {
 
   initForm() {
     this.deliveryManForm = new FormGroup({
-      firstName: new FormControl(this.deliveryMan.FirstName, Validators.required),
-      lastName: new FormControl(this.deliveryMan.LastName, Validators.required),
-      phoneNumber: new FormControl(this.deliveryMan.PhoneNumber, [Validators.required, Validators.minLength(9)]),
-      birthday: new FormControl(this.deliveryMan.Birthday, Validators.required),
-      city: new FormControl(this.deliveryMan.City, Validators.required),
-      address: new FormControl(this.deliveryMan.Address, Validators.required),
-      passportSeries: new FormControl(this.deliveryMan.PassportSeries, [Validators.required, Validators.minLength(9)]),
-      districtId: new FormControl(this.deliveryMan.DistrictId, Validators.required)
+      id: new FormControl(this.deliveryManId),
+      firstName: new FormControl(this.deliveryMan.firstName, Validators.required),
+      lastName: new FormControl(this.deliveryMan.lastName, Validators.required),
+      phoneNumber: new FormControl(this.deliveryMan.phoneNumber, [Validators.required, Validators.minLength(9)]),
+      birthday: new FormControl(this.deliveryMan.birthday, Validators.required),
+      city: new FormControl(this.deliveryMan.city, Validators.required),
+      address: new FormControl(this.deliveryMan.address, Validators.required),
+      passportSeries: new FormControl(this.deliveryMan.passportSeries, [Validators.required]),
+      districtId: new FormControl(this.deliveryMan.districtId, Validators.required)
     });
   }
 
   populateForm() {
     this.deliveryManForm.patchValue({
-      firstName: this.deliveryMan.FirstName,
-      lastName: this.deliveryMan.LastName,
-      phoneNumber: this.deliveryMan.PhoneNumber,
-      birthday: this.deliveryMan.Birthday,
-      city: this.deliveryMan.City,
-      address: this.deliveryMan.Address,
-      passportSeries: this.deliveryMan.PassportSeries,
-      districtId: this.deliveryMan.DistrictId
+      id: this.deliveryManId,
+      firstName: this.deliveryMan.firstName,
+      lastName: this.deliveryMan.lastName,
+      phoneNumber: this.deliveryMan.phoneNumber,
+      birthday: this.datePipe.transform(this.deliveryMan.birthday,'yyyy-MM-dd'),
+      city: this.deliveryMan.city,
+      address: this.deliveryMan.address,
+      passportSeries: this.deliveryMan.passportSeries,
+      districtId: this.deliveryMan.districtId
     });
   }
 
-  onSubmit() {
-    console.log(this.deliveryManForm.value)
+  postDeliveryMan() {
+    this.deliveryManService.postEntity(this.deliveryManForm.value)
+      .subscribe(data => {
+        this.alertifyService.success("Сохранение произошло успешно");
+      })
+  }
+
+  deleteDeliveryMan() {
+    this.deliveryManService.deleteEntity(this.deliveryManId)
+      .subscribe(data => {
+        this.alertifyService.success("Удаление произошло успешно");
+        this.router.navigate(['/delivery-man-list']);
+      })
   }
 }

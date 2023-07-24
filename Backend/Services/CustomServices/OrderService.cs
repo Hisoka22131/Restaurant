@@ -30,7 +30,7 @@ public class DishOrderService : IOrderService
 
     public void PostEntity(OrderDto dto)
     {
-        var entity = dto?.Id != null
+        var entity = dto?.Id != null && dto?.Id != 0
             ? _orderRepository.GetOrder(dto.Id)
             : new Order();
 

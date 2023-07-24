@@ -3,7 +3,7 @@ import {AbstractService} from "../abstract/abstract.service";
 import {environment} from "../../../../environments/environments";
 import {map, Observable} from "rxjs";
 import {IDistrict} from "../../disctrict/IDistrict";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +19,38 @@ export class DistrictService implements AbstractService {
   private testDistrictUrl: string = 'data/district.json';
 
   getAllEntities(): Observable<IDistrict[]> {
-    return this.http.get<Record<string, any>>(this.testDistrictUrl).pipe(
-      map((data) => {
-        const arr: Array<IDistrict> = [];
-        for (const id in data) {
-          if (data.hasOwnProperty(id)) arr.push(data[id]);
-        }
-        return arr;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
       })
-    );
+    };
+    return this.http.get<IDistrict[]>(this.baseApiUrl + "/district/get-districts", httpOptions);
   }
 
   getEntity(id: number): Observable<IDistrict> {
-    return this.http.get<Record<string, any>>(this.testDistrictUrl).pipe(
-      map((data) => {
-        return data[id];
-      }))
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.get<IDistrict>(this.baseApiUrl + "/district/get-district/" + id.toString(), httpOptions)
+  }
+
+  deleteEntity(id: number){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.delete<IDistrict>(this.baseApiUrl + "/district/delete-district/" + id.toString(), httpOptions)
+  }
+
+  postEntity(district: IDistrict){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.post<IDistrict>(this.baseApiUrl + "/district/send-district", district, httpOptions)
   }
 }

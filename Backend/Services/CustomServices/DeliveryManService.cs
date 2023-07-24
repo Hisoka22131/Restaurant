@@ -21,11 +21,12 @@ public class DeliveryManService : IDeliveryManService
     public async Task<IEnumerable<DeliveryManDto>> GetEntities() =>
         DeliveryManRepository.GetEntities().Adapt<IEnumerable<DeliveryManDto>>();
 
-    public async Task<DeliveryManDto> GetEntity(int id) => DeliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
+    public async Task<DeliveryManDto> GetEntity(int id) =>
+        DeliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
 
     public void PostEntity(DeliveryManDto dto)
     {
-        var entity = dto?.Id != null
+        var entity = dto?.Id != null && dto?.Id != 0
             ? DeliveryManRepository.GetDeliveryMan(dto.Id)
             : new DeliveryMan();
 
@@ -36,7 +37,9 @@ public class DeliveryManService : IDeliveryManService
         entity.Address = dto.Address;
         entity.Birthday = dto.Birthday;
         entity.PassportSeries = dto.PassportSeries;
-        
+        if (dto.DistrictId != 0)
+            entity.DistrictId = dto.DistrictId;
+        entity.UserId = 1;
         DeliveryManRepository.InsertOrUpdate(entity);
         _unitOfWork.Save();
     }

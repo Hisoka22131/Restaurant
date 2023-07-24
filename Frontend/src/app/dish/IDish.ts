@@ -1,8 +1,8 @@
 import {IBase} from "../base/IBase";
 
 export interface IDish extends IBase {
-  Name: string;
-  Type: string;
-  TaggingDish: number;
-  Price: number;
+  name: string;
+  type: string;
+  taggingDish: number;
+  price: number;
 }

@@ -18,8 +18,8 @@ export class DistrictDetailComponent {
   districtForm: FormGroup;
   public districtId: number;
   public district: IDistrict = {
-    Id: 0,
-    Name: ""
+    id: 0,
+    name: ""
   };
 
   constructor(
@@ -38,6 +38,7 @@ export class DistrictDetailComponent {
   }
 
   getDistrict() {
+    if (!this.districtId) return;
     this.districtService
       .getEntity(this.districtId)
       .subscribe(c => {
@@ -50,17 +51,30 @@ export class DistrictDetailComponent {
 
   initForm() {
     this.districtForm = new FormGroup({
-      name: new FormControl(this.district.Name, Validators.required)
+      id: new FormControl(this.districtId),
+      name: new FormControl(this.district.name, Validators.required)
     });
   }
 
   populateForm() {
     this.districtForm.patchValue({
-      name: this.district.Name
+      id: this.districtId,
+      name: this.district.name
     });
   }
 
-  onSubmit() {
-    this.alertifyService.message(JSON.parse(this.districtForm.value.toString()));
+  postDistrict() {
+    this.districtService.postEntity(this.districtForm.value)
+      .subscribe(data => {
+        this.alertifyService.success("Сохранение произошло успешно");
+      })
+  }
+
+  deleteDistrict() {
+    this.districtService.deleteEntity(this.districtId)
+      .subscribe(data => {
+        this.alertifyService.success("Удаление произошло успешно");
+        this.router.navigate(['/district-list']);
+      })
   }
 }

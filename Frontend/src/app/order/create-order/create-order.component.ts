@@ -28,9 +28,9 @@ export class CreateOrderComponent implements OnInit {
     if (!this.selectedDishes || !this.currentOrder) return "0";
 
     return this.currentOrder.reduce((sum, orderItem) => {
-      const dish = this.selectedDishes.find(q => q.Id === orderItem.DishId);
-      const price = dish?.Price || 0;
-      return sum + price * orderItem.Count;
+      const dish = this.selectedDishes.find(q => q.id === orderItem.dishId);
+      const price = dish?.price || 0;
+      return sum + price * orderItem.count;
     }, 0).toFixed(1);
   }
 

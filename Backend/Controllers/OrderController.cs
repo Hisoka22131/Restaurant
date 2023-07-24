@@ -21,11 +21,11 @@ public class OrderController : ControllerBase
     public async Task<IEnumerable<OrderDto>> Get() => await _orderService.GetEntities();
 
     [HttpGet]
-    [Route("get-my orders/{clientId:int}")]
+    [Route("get-my-orders/{clientId:int}")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
     public async Task<IEnumerable<OrderListDto>> Get(int clientId) => await _orderService.Get(clientId);
 
-    [HttpPost]
+    [HttpGet]
     [Route("get-order/{id:int}")]
     [Authorize(Roles = Role.Admin)]
     public async Task<OrderDto> GetEntity(int id) => await _orderService.GetEntity(id);

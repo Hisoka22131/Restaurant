@@ -16,11 +16,11 @@ export class DishDetailComponent implements OnInit {
   dishForm: FormGroup;
   public dishId: number;
   public dish: IDish = {
-    Id: 0,
-    Name: "",
-    Type: "",
-    TaggingDish: 0,
-    Price: 0
+    id: 0,
+    name: "",
+    type: "",
+    taggingDish: 0,
+    price: 0
   };
 
   constructor(
@@ -39,6 +39,7 @@ export class DishDetailComponent implements OnInit {
   }
 
   getDish() {
+    if (!this.dishId) return;
     this.dishService
       .getEntity(this.dishId)
       .subscribe(c => {
@@ -51,22 +52,34 @@ export class DishDetailComponent implements OnInit {
 
   initForm() {
     this.dishForm = new FormGroup({
-      name: new FormControl(this.dish.Name, Validators.required),
-      type: new FormControl(this.dish.Type, Validators.required),
-      taggingDish: new FormControl(this.dish.TaggingDish, Validators.required)
+      id: new FormControl(this.dishId),
+      name: new FormControl(this.dish.name, Validators.required),
+      type: new FormControl(this.dish.type, Validators.required),
+      taggingDish: new FormControl(this.dish.taggingDish, Validators.required)
     });
   }
 
   populateForm() {
     this.dishForm.patchValue({
-      name: this.dish.Name,
-      type: this.dish.Type,
-      taggingDish: this.dish.TaggingDish
+      id: this.dishId,
+      name: this.dish.name,
+      type: this.dish.type,
+      taggingDish: this.dish.taggingDish
     });
   }
 
-  onSubmit() {
-    this.alertifyService.message(JSON.parse(this.dishForm.value.toString()));
+  postDish() {
+    this.dishService.postEntity(this.dishForm.value)
+      .subscribe(data => {
+        this.alertifyService.success("Сохранение произошло успешно");
+      })
   }
 
+  deleteDish() {
+    this.dishService.deleteEntity(this.dishId)
+      .subscribe(data => {
+        this.alertifyService.success("Удаление произошло успешно");
+        this.router.navigate(['/dish-list']);
+      })
+  }
 }

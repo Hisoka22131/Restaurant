@@ -3,11 +3,11 @@
     <img class="card-img-top" src="assets/images/clients/user.png"/>
   </div>
   <div class="card-body p-2">
-    <h4>{{ dish.Name }}</h4>
-    <h5>{{ dish.Type }}</h5>
-    <h5>{{ dish.TaggingDish }}</h5>
+    <h4>{{ dish.name }}</h4>
+    <h5>{{ dish.type }}</h5>
+    <h5>{{ dish.taggingDish }}</h5>
     <div class="col-12">
-      <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="/dish-detail/{{dish.Id}}"
+      <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="/dish-detail/{{dish.id}}"
          class="btn btn-sm btn-primary">Подробнее</a>
       <button (click)="onAddToOrder()" class="btn btn-sm btn-success" [disabled]="isExistsInOrder()"
               style="margin-left: 10px">Добавить в заказ

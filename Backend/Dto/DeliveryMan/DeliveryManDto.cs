@@ -8,7 +8,6 @@ public class DeliveryManDto : EntityDto
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
     public string City { get; set; }
-    public string DistrictName { get; set; }
     
     public string Address { get; set; }
     
@@ -16,4 +15,5 @@ public class DeliveryManDto : EntityDto
     
     public DateTime Birthday { get; set; }
     
+    public int DistrictId { get; set; }
 }

@@ -20,6 +20,6 @@ export class CreateOrderTableComponent {
       this.quantity += 1;
     else
       this.quantity -= this.quantity === 1 ? 0 : 1;
-    this.dishOrderService.updateDishOrderCount(this.dish.Id, this.quantity);
+    this.dishOrderService.updateDishOrderCount(this.dish.id, this.quantity);
   }
 }

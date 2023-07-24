@@ -17,15 +17,15 @@ export class ClientDetailComponent implements OnInit {
   clientForm: FormGroup;
   public clientId: number;
   public client: IClient = {
-    Id: 0,
-    DiscountPercentage: 0,
-    FirstName: "",
-    LastName: "",
-    PhoneNumber: "",
-    Birthday: "",
-    City: "",
-    Address: "",
-    PassportSeries: ""
+    id: 0,
+    discountPercentage: 0,
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    birthday: "",
+    city: "",
+    address: "",
+    passportSeries: ""
   };
 
   constructor(
@@ -56,27 +56,27 @@ export class ClientDetailComponent implements OnInit {
 
   initForm() {
     this.clientForm = new FormGroup({
-      firstName: new FormControl(this.client.FirstName, Validators.required),
-      lastName: new FormControl(this.client.LastName, Validators.required),
-      phoneNumber: new FormControl(this.client.PhoneNumber, [Validators.required, Validators.minLength(9)]),
-      birthday: new FormControl(this.client.Birthday, Validators.required),
-      city: new FormControl(this.client.City, Validators.required),
-      address: new FormControl(this.client.Address, Validators.required),
-      passportSeries: new FormControl(this.client.PassportSeries, [Validators.required, Validators.minLength(9)]),
-      discountPercentage: new FormControl(this.client.DiscountPercentage, Validators.required)
+      firstName: new FormControl(this.client.firstName, Validators.required),
+      lastName: new FormControl(this.client.lastName, Validators.required),
+      phoneNumber: new FormControl(this.client.phoneNumber, [Validators.required, Validators.minLength(9)]),
+      birthday: new FormControl(this.client.birthday, Validators.required),
+      city: new FormControl(this.client.city, Validators.required),
+      address: new FormControl(this.client.address, Validators.required),
+      passportSeries: new FormControl(this.client.passportSeries, [Validators.required, Validators.minLength(9)]),
+      discountPercentage: new FormControl(this.client.discountPercentage, Validators.required)
     });
   }
 
   populateForm() {
     this.clientForm.patchValue({
-      firstName: this.client.FirstName,
-      lastName: this.client.LastName,
-      phoneNumber: this.client.PhoneNumber,
-      birthday: this.client.Birthday,
-      city: this.client.City,
-      address: this.client.Address,
-      passportSeries: this.client.PassportSeries,
-      discountPercentage: this.client.DiscountPercentage
+      firstName: this.client.firstName,
+      lastName: this.client.lastName,
+      phoneNumber: this.client.phoneNumber,
+      birthday: this.client.birthday,
+      city: this.client.city,
+      address: this.client.address,
+      passportSeries: this.client.passportSeries,
+      discountPercentage: this.client.discountPercentage
     });
   }
 

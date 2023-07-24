@@ -31,7 +31,7 @@ public class DistrictService : IDistrictService
 
     public void PostEntity(DistrictDto dto)
     {
-        var entity = dto?.Id != null
+        var entity = (dto?.Id != null && dto?.Id != 0)
             ? DistrictRepository.GetDistrict(dto.Id)
             : new District();
 
