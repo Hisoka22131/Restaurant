@@ -33,6 +33,14 @@
               </div>
             </div>
             <div class="form-group col-12">
+              <label for="price">Цена:</label>
+              <input id="price" type="number" class="form-control" formControlName="price"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(dishForm.get('price'))}"/>
+              <div class="error-message" *ngIf="dishForm.get('price')?.errors?.['required']">Поле 'Цена' должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
               <button [disabled]="dishForm.invalid" type="submit" class="btn btn-primary" (click)="postDish()">Сохранить</button>
               <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
             </div>

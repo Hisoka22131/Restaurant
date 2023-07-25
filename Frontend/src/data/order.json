@@ -1,92 +1,92 @@
 [
   {
-    "Id": 1,
-    "Number": "ABC123",
-    "Type": 1,
-    "Price": 100.0,
-    "DiscountAmount": 5,
-    "ClientId": 1,
-    "DeliveryManId": 1
+    "id": 1,
+    "number": "ABC123",
+    "type": 1,
+    "price": 100.0,
+    "discountAmount": 5,
+    "clientId": 1,
+    "deliveryManId": 1
   },
   {
-    "Id": 2,
-    "Number": "DEF456",
-    "Type": 2,
-    "Price": 50.0,
-    "DiscountAmount": 3,
-    "ClientId": 2,
-    "DeliveryManId": 2
+    "id": 2,
+    "number": "DEF456",
+    "type": 2,
+    "price": 50.0,
+    "discountAmount": 3,
+    "clientId": 2,
+    "deliveryManId": 2
   },
   {
-    "Id": 3,
-    "Number": "GHI789",
-    "Type": 1,
-    "Price": 75.0,
-    "DiscountAmount": 2,
-    "ClientId": 3,
-    "DeliveryManId": 3
+    "id": 3,
+    "number": "GHI789",
+    "type": 1,
+    "price": 75.0,
+    "discountAmount": 2,
+    "clientId": 3,
+    "deliveryManId": 3
   },
   {
-    "Id": 4,
-    "Number": "JKL012",
-    "Type": 2,
-    "Price": 120.0,
-    "DiscountAmount": 7,
-    "ClientId": 4,
-    "DeliveryManId": 4
+    "id": 4,
+    "number": "JKL012",
+    "type": 2,
+    "price": 120.0,
+    "discountAmount": 7,
+    "clientId": 4,
+    "deliveryManId": 4
   },
   {
-    "Id": 5,
-    "Number": "MNO345",
-    "Type": 1,
-    "Price": 90.0,
-    "DiscountAmount": 4,
-    "ClientId": 5,
-    "DeliveryManId": 5
+    "id": 5,
+    "number": "MNO345",
+    "type": 1,
+    "price": 90.0,
+    "discountAmount": 4,
+    "clientId": 5,
+    "deliveryManId": 5
   },
   {
-    "Id": 6,
-    "Number": "PQR678",
-    "Type": 2,
-    "Price": 65.0,
-    "DiscountAmount": 1,
-    "ClientId": 6,
-    "DeliveryManId": 6
+    "id": 6,
+    "number": "PQR678",
+    "type": 2,
+    "price": 65.0,
+    "discountAmount": 1,
+    "clientId": 6,
+    "deliveryManId": 6
   },
   {
-    "Id": 7,
-    "Number": "STU901",
-    "Type": 1,
-    "Price": 80.0,
-    "DiscountAmount": 3,
-    "ClientId": 7,
-    "DeliveryManId": 7
+    "id": 7,
+    "number": "STU901",
+    "type": 1,
+    "price": 80.0,
+    "discountAmount": 3,
+    "clientId": 7,
+    "deliveryManId": 7
   },
   {
-    "Id": 8,
-    "Number": "VWX234",
-    "Type": 2,
-    "Price": 150.0,
-    "DiscountAmount": 9,
-    "ClientId": 8,
-    "DeliveryManId": 8
+    "id": 8,
+    "number": "VWX234",
+    "type": 2,
+    "price": 150.0,
+    "discountAmount": 9,
+    "clientId": 8,
+    "deliveryManId": 8
   },
   {
-    "Id": 9,
-    "Number": "YZA567",
-    "Type": 1,
-    "Price": 110.0,
-    "DiscountAmount": 6,
-    "ClientId": 9,
-    "DeliveryManId": 9
+    "id": 9,
+    "number": "YZA567",
+    "type": 1,
+    "price": 110.0,
+    "discountAmount": 6,
+    "clientId": 9,
+    "deliveryManId": 9
   },
   {
-    "Id": 10,
-    "Number": "BCD890",
-    "Type": 2,
-    "Price": 70.0,
-    "DiscountAmount": 2,
-    "ClientId": 10,
-    "DeliveryManId": 10
+    "id": 10,
+    "number": "BCD890",
+    "type": 2,
+    "price": 70.0,
+    "discountAmount": 2,
+    "clientId": 10,
+    "deliveryManId": 10
   }
 ]

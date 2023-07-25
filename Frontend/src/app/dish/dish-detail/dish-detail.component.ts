@@ -55,7 +55,8 @@ export class DishDetailComponent implements OnInit {
       id: new FormControl(this.dishId),
       name: new FormControl(this.dish.name, Validators.required),
       type: new FormControl(this.dish.type, Validators.required),
-      taggingDish: new FormControl(this.dish.taggingDish, Validators.required)
+      taggingDish: new FormControl(this.dish.taggingDish, Validators.required),
+      price: new FormControl(this.dish.price, Validators.required)
     });
   }
 
@@ -64,7 +65,8 @@ export class DishDetailComponent implements OnInit {
       id: this.dishId,
       name: this.dish.name,
       type: this.dish.type,
-      taggingDish: this.dish.taggingDish
+      taggingDish: this.dish.taggingDish,
+      price: this.dish.price
     });
   }
 

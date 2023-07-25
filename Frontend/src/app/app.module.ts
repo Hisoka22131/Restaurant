@@ -33,8 +33,9 @@ import {DatePipe, NgOptimizedImage} from "@angular/common";
 import {CreateOrderTableComponent} from './order/create-order-table/create-order-table.component';
 import {OrderListComponent} from './order/order-list/order-list.component';
 import {HttpErrorInterceptorService} from "./services/http-error-interceptor.service";
-import { LoginFormComponent } from './login-register/login-form/login-form.component';
-import { RegisterFormComponent } from './login-register/register-form/register-form.component';
+import {LoginFormComponent} from './login-register/login-form/login-form.component';
+import {RegisterFormComponent} from './login-register/register-form/register-form.component';
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 
 @NgModule({
   declarations: [

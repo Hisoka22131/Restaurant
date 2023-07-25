@@ -14,8 +14,7 @@ public partial class Dish : EntityBase
     public string Name { get; set; }
     public string? Type { get; set; }
     public string? ImagePath { get; set; }
-        
+    public decimal Price { get; set; }
     public TaggingDish TaggingDish { get; set; }
-
     public virtual ICollection<DishOrder> DishesOrders { get; set; }
 }

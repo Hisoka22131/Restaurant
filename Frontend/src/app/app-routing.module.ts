@@ -15,7 +15,7 @@ import {LoginFormComponent} from "./login-register/login-form/login-form.compone
 
 const routes: Routes = [
   //хом
-  {path: '', component: HomePageComponent},
+  {path: '', component: DishListComponent},
   {path: 'client-list', component: ClientListComponent},
   {path: 'client-detail/:id', component: ClientDetailComponent},
   {path: 'dish-list', component: DishListComponent},
@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'order-list', component: OrderListComponent},
   {path: 'login', component: LoginFormComponent},
   //в конце
-  {path: '**', component: HomePageComponent}
+  {path: '**', component: DishListComponent}
 ];
 
 @NgModule({

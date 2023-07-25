@@ -41,6 +41,8 @@ public class DishService : IDishService
         entity.Name = dto.Name;
         entity.TaggingDish = dto.TaggingDish;
         entity.Type = dto.Type;
+        entity.Price = dto.Price;
+        
         _dishRepository.InsertOrUpdate(entity);
         _unitOfWork.Save();
     }
