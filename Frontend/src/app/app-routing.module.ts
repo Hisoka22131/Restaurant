@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomePageComponent} from "./home-page/home-page.component";
 import {ClientListComponent} from "./client/client-list/client-list.component";
 import {ClientDetailComponent} from "./client/client-detail/client-detail.component";
 import {DishDetailComponent} from "./dish/dish-detail/dish-detail.component";
@@ -12,6 +11,7 @@ import {DeliveryManDetailComponent} from "./deliveryman/delivery-man-detail/deli
 import {CreateOrderComponent} from "./order/create-order/create-order.component";
 import {OrderListComponent} from "./order/order-list/order-list.component";
 import {LoginFormComponent} from "./login-register/login-form/login-form.component";
+import {RegisterFormComponent} from "./login-register/register-form/register-form.component";
 
 const routes: Routes = [
   //хом
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'create-order', component: CreateOrderComponent},
   {path: 'order-list', component: OrderListComponent},
   {path: 'login', component: LoginFormComponent},
+  {path: 'register', component: RegisterFormComponent},
   //в конце
   {path: '**', component: DishListComponent}
 ];

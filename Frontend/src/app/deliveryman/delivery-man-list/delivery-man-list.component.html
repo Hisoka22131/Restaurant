@@ -1,10 +1,12 @@
-<div class="row">
-  <div class="form-group col-12">
-    <a href="/delivery-man-detail/0" class="btn btn-success" style="margin-bottom: 10px">Добавить курьера</a>
-  </div>
-  <div *ngFor="let deliveryMan of deliveryMans" class="col-sm-3">
-    <div class="card shadow-lg p-3 mb-4">
-      <app-delivery-man-card [deliveryMan]="deliveryMan"></app-delivery-man-card>
+<section class="wrapper">
+  <div class="container">
+    <div class="form-group col-12">
+      <a href="/delivery-man-detail/0" class="btn btn-success" style="margin-bottom: 10px">Добавить курьера</a>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let deliveryMan of deliveryMans">
+        <app-delivery-man-card [deliveryMan]="deliveryMan"></app-delivery-man-card>
+      </div>
     </div>
   </div>
-</div>
+</section>

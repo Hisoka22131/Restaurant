@@ -11,13 +11,7 @@ import {FormGroup, NgForm} from "@angular/forms";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  loginForm: FormGroup;
-  user: IUserForLogin = {
-    id: 0,
-    email: "",
-    token: "",
-    password: ""
-  };
+  isPasswordVisible: boolean = false;
 
   constructor(private authService: AuthService,
               private alertifyService: AlertifyService,
@@ -29,7 +23,6 @@ export class LoginFormComponent {
       .subscribe(data => {
         const user = data as IUserForLogin;
         if (user) {
-          console.log(user)
           localStorage.setItem('token', user.token);
           localStorage.setItem('email', user.email);
           this.alertifyService.success('Login Successful');
@@ -37,6 +30,12 @@ export class LoginFormComponent {
           this.authService.setCurrentUser(user);
         }
       });
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+    const passwordField = document.getElementById('password-field') as HTMLInputElement;
+    passwordField.type = this.isPasswordVisible ? 'text' : 'password';
   }
 
 }

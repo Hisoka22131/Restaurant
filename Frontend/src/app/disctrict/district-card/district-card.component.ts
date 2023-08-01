@@ -1,5 +1,4 @@
-import {Component, Inject, Input} from '@angular/core';
-import {IDish} from "../../dish/IDish";
+import {Component, Input} from '@angular/core';
 import {IDistrict} from "../IDistrict";
 
 @Component({
