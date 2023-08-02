@@ -11,23 +11,25 @@ namespace Backend.Services.CustomServices;
 public class DeliveryManService : IDeliveryManService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private IDeliveryManRepository DeliveryManRepository => _unitOfWork.DeliveryManRepository;
+    private IDeliveryManRepository _deliveryManRepository => _unitOfWork.DeliveryManRepository;
+    private IAuthService _authService;
 
-    public DeliveryManService(IUnitOfWork unitOfWork)
+    public DeliveryManService(IUnitOfWork unitOfWork, IAuthService authService)
     {
         _unitOfWork = unitOfWork;
+        _authService = authService;
     }
 
     public async Task<IEnumerable<DeliveryManDto>> GetEntities() =>
-        DeliveryManRepository.GetEntities().Adapt<IEnumerable<DeliveryManDto>>();
+        _deliveryManRepository.GetEntities().Adapt<IEnumerable<DeliveryManDto>>();
 
     public async Task<DeliveryManDto> GetEntity(int id) =>
-        DeliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
+        _deliveryManRepository.GetDeliveryMan(id).Adapt<DeliveryManDto>();
 
     public void PostEntity(DeliveryManDto dto)
     {
         var entity = dto?.Id != null && dto?.Id != 0
-            ? DeliveryManRepository.GetDeliveryMan(dto.Id)
+            ? _deliveryManRepository.GetDeliveryMan(dto.Id)
             : new DeliveryMan();
 
         entity.FirstName = dto.FirstName;
@@ -39,15 +41,20 @@ public class DeliveryManService : IDeliveryManService
         entity.PassportSeries = dto.PassportSeries;
         if (dto.DistrictId != 0)
             entity.DistrictId = dto.DistrictId;
-        entity.UserId = 1;
-        DeliveryManRepository.InsertOrUpdate(entity);
+        
+        _deliveryManRepository.InsertOrUpdate(entity);
         _unitOfWork.Save();
     }
 
     public void PostDelete(int id)
     {
-        var entity = DeliveryManRepository.GetDeliveryMan(id);
-        DeliveryManRepository.Remove(entity);
+        var entity = _deliveryManRepository.GetDeliveryMan(id);
+        _deliveryManRepository.Remove(entity);
         _unitOfWork.Save();
+    }
+
+    public void CreateDeliveryMan()
+    {
+        
     }
 }

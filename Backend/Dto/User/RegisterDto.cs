@@ -2,7 +2,7 @@
 
 namespace Backend.Dto.User;
 
-public class UserRegisterDto : PersonalInfoBaseDto
+public class RegisterDto : EntityDto
 {
     public string Email { get; set; }
     public string Password { get; set; }

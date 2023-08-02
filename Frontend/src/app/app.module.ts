@@ -36,6 +36,7 @@ import {HttpErrorInterceptorService} from "./services/http-error-interceptor.ser
 import {LoginFormComponent} from './login-register/login-form/login-form.component';
 import {RegisterFormComponent} from './login-register/register-form/register-form.component';
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import { CreateDeliveryManModalComponent } from './deliveryman/create-delivery-man-modal/create-delivery-man-modal.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown";
     CreateOrderTableComponent,
     OrderListComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    CreateDeliveryManModalComponent
   ],
   imports: [
     BrowserModule,

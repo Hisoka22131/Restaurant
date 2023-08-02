@@ -25,5 +25,5 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> Register(UserRegisterDto dto) => await _authService.Register(dto);
+    public async Task<IActionResult> Register(UserRegisterDto dto) => await _authService.RegisterClient(dto);
 }

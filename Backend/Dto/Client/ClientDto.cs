@@ -2,6 +2,7 @@
 
 namespace Backend.Dto.Client;
 
-public class ClientDto : EntityDto
+public class ClientDto : PersonalInfoBaseDto
 {
+    public int? DiscountPercentage { get; set; }
 }

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../../../environments/environments";
 import {IClient} from "../../client/IClient";
 import {AbstractService} from "../abstract/abstract.service";
+import {IDistrict} from "../../disctrict/IDistrict";
 
 @Injectable({
   providedIn: 'root'
@@ -18,21 +19,18 @@ export class ClientService implements AbstractService {
   }
 
   getAllEntities(): Observable<IClient[]> {
-    return this.http.get<Record<string, any>>(this.testClientUrl).pipe(
-      map((data) => {
-        const clientsArray: Array<IClient> = [];
-        for (const id in data) {
-          if (data.hasOwnProperty(id)) clientsArray.push(data[id]);
-        }
-        return clientsArray;
-      })
-    );
+    return this.http.get<IClient[]>(this.baseApiUrl + "/client/get-clients");
   }
 
   getEntity(id: number): Observable<IClient> {
-    return this.http.get<Record<string, any>>(this.testClientUrl).pipe(
-      map((data) => {
-        return data[id];
-      }))
+    return this.http.get<IClient>(this.baseApiUrl + "/client/get-client/" + id.toString())
+  }
+
+  deleteEntity(id: number){
+    return this.http.delete<IClient>(this.baseApiUrl + "/client/delete-client/" + id.toString())
+  }
+
+  postEntity(district: IClient){
+    return this.http.post<IClient>(this.baseApiUrl + "/client/send-client", district)
   }
 }

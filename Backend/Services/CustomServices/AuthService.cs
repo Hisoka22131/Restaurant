@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Dto.Auth.Login;
+using Backend.Dto.Base;
 using Backend.Dto.User;
 using Backend.Helpers;
 using Backend.Services.Interfaces;
@@ -18,7 +19,9 @@ public class AuthService : IAuthService
 {
     private readonly IConfiguration _configuration;
     private readonly IUnitOfWork _unitOfWork;
-    private IUserRepository UserRepository => _unitOfWork.UserRepository;
+    private IUserRepository _userRepository => _unitOfWork.UserRepository;
+    private IClientRepository _clientRepository => _unitOfWork.ClientRepository;
+    private IRoleRepository _roleRepository => _unitOfWork.RoleRepository;
 
     public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration)
     {
@@ -28,7 +31,7 @@ public class AuthService : IAuthService
 
     public async Task<IActionResult> Login(LoginRequestDto request)
     {
-        var user = await UserRepository.Authenticate(request.Email, request.Password);
+        var user = await _userRepository.Authenticate(request.Email, request.Password);
 
         // Unauthorized
         if (user == null) return new UnauthorizedResult();
@@ -43,19 +46,41 @@ public class AuthService : IAuthService
         return new OkObjectResult(response);
     }
 
-    public async Task<IActionResult> Register(UserRegisterDto dto)
+    public async Task<User> Register(string email, string password)
     {
-        if (await UserRepository.UserAlreadyInDatabase(dto?.Email) || string.IsNullOrEmpty(dto?.Email))
-            return new BadRequestObjectResult("User already exists or user email is null, please try something else");
+        if (await _userRepository.UserAlreadyInDatabase(email) || string.IsNullOrEmpty(email))
+            throw new ArgumentException("User already exists or user email is null, please try something else");
 
         var user = new User
         {
-            Email = dto.Email,
+            Email = email
         };
+        _userRepository.Register(user, password);
+        return user;
+    }
 
-        UserRepository.Register(user, dto.Password);
-        _unitOfWork.Save();
-        // StatusCode(201)
+    public async Task<IActionResult> RegisterClient(UserRegisterDto dto)
+    {
+        CreateClient(await Register(dto.Email, dto.Password), dto);
         return new StatusCodeResult(201);
+    }
+
+    private void CreateClient(User user, PersonalInfoBaseDto dto)
+    {
+        var client = new Client()
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Birthday = dto.Birthday,
+            PassportSeries = dto.PassportSeries,
+            City = dto.City,
+            Address = dto.Address,
+            PhoneNumber = dto.PhoneNumber,
+            User = user,
+            DiscountPercentage = 0
+        };
+        user.Roles.Add(_roleRepository.GetEntities().First(q => q.Name == Role.Client));
+        _clientRepository.Insert(client);
+        _unitOfWork.Save();
     }
 }

@@ -33,10 +33,12 @@ public class DishOrderService : IOrderService
     public void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos)
     {
         if (!dishOrderDtos.Any()) throw new ArgumentException("Заказ пуст");
-        var order = new Order();
-        order.Number = new Random().Next(100000, 999999).ToString();
-        order.Type = TypeOrder.Site;
-        order.ClientId = 2;
+        var order = new Order
+        {
+            Number = new Random().Next(100000, 999999).ToString(),
+            Type = TypeOrder.Site,
+            ClientId = 2
+        };
         var tupleIds = _deliveryManRepository.GetMaxMinId();
         order.DeliveryManId = new Random().Next(tupleIds.min, tupleIds.max);
         SetDish(order, dishOrderDtos);

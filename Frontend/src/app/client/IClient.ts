@@ -1,7 +1,7 @@
 import {IBase} from "../base/IBase";
 
 export interface IClient extends IBase {
-  discountPercentage: number,
+  discountPercentage?: number,
   firstName: string,
   lastName: string,
   phoneNumber: string,

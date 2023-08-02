@@ -43,7 +43,7 @@ public class OrderController : ControllerBase
 
     [HttpPost]
     [Route("create-order")]
-    [Authorize(Roles = Role.Client)]
+    [Authorize(Roles = Role.ClientOrAdmin)]
     public void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos) => _orderService.CreateOrder(dishOrderDtos);
 
 }

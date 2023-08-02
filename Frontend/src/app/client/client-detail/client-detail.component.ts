@@ -6,6 +6,7 @@ import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AlertifyService} from "../../services/view/alertify.service";
 import {environment} from "../../../../environments/environments";
 import {FormService} from "../../services/view/form.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-client-detail',
@@ -33,7 +34,8 @@ export class ClientDetailComponent implements OnInit {
     private router: Router,
     private clientService: ClientService,
     private alertifyService: AlertifyService,
-    public formService: FormService) {
+    public formService: FormService,
+    public datePipe: DatePipe) {
     //преобразуем в Number '+*'
     this.clientId = +this.route.snapshot.params['id'];
   }
@@ -56,6 +58,7 @@ export class ClientDetailComponent implements OnInit {
 
   initForm() {
     this.clientForm = new FormGroup({
+      id: new FormControl(this.clientId),
       firstName: new FormControl(this.client.firstName, Validators.required),
       lastName: new FormControl(this.client.lastName, Validators.required),
       phoneNumber: new FormControl(this.client.phoneNumber, [Validators.required, Validators.minLength(9)]),
@@ -69,10 +72,11 @@ export class ClientDetailComponent implements OnInit {
 
   populateForm() {
     this.clientForm.patchValue({
+      id: this.clientId,
       firstName: this.client.firstName,
       lastName: this.client.lastName,
       phoneNumber: this.client.phoneNumber,
-      birthday: this.client.birthday,
+      birthday: this.datePipe.transform(this.client.birthday,'yyyy-MM-dd'),
       city: this.client.city,
       address: this.client.address,
       passportSeries: this.client.passportSeries,
@@ -80,7 +84,18 @@ export class ClientDetailComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.alertifyService.message(JSON.parse(this.clientForm.value.toString()));
+  postClient() {
+    this.clientService.postEntity(this.clientForm.value)
+      .subscribe(data => {
+        this.alertifyService.success("Сохранение произошло успешно");
+      })
+  }
+
+  deleteClient() {
+    this.clientService.deleteEntity(this.clientId)
+      .subscribe(data => {
+        this.alertifyService.success("Удаление произошло успешно");
+        this.router.navigate(['/client-list']);
+      })
   }
 }

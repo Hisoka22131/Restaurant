@@ -19,6 +19,7 @@ public class UnitOfWork : IUnitOfWork
         DishesOrderRepository = new DishesOrderRepository(_dbContext);
         DeliveryManRepository = new DeliveryManRepository(_dbContext);
         UserRepository = new UserRepository(_dbContext);
+        RoleRepository = new RoleRepository(_dbContext);
     }
 
     public void Dispose() => _dbContext.Dispose();
@@ -30,6 +31,7 @@ public class UnitOfWork : IUnitOfWork
     public IDishesOrderRepository DishesOrderRepository { get; set; }
     public IDeliveryManRepository DeliveryManRepository { get; set; }
     public IUserRepository UserRepository { get; set; }
+    public IRoleRepository RoleRepository { get; set; }
 
     public int Save() => _dbContext.SaveChanges();
 }
