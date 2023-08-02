@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IClient} from "../IClient";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-client-card',
@@ -8,4 +9,10 @@ import {IClient} from "../IClient";
 })
 export class ClientCardComponent {
   @Input() client: IClient
+  constructor(private route: Router) {
+  }
+
+  goToDetail() {
+    this.route.navigate([`/client-detail/` + this.client.id.toString()])
+  }
 }

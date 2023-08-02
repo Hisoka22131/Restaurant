@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Backend.Dto.DishOrder;
 using Backend.Dto.Order;
 using Backend.Services.Interfaces;
 using Core.Domain;
@@ -39,4 +40,10 @@ public class OrderController : ControllerBase
     [Route("delete-order")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
     public void DeleteOrder(int id) => _orderService.PostDelete(id);
+
+    [HttpPost]
+    [Route("create-order")]
+    [Authorize(Roles = Role.Client)]
+    public void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos) => _orderService.CreateOrder(dishOrderDtos);
+
 }

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IDistrict} from "../IDistrict";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-district-card',
@@ -8,4 +9,11 @@ import {IDistrict} from "../IDistrict";
 })
 export class DistrictCardComponent {
   @Input() district: IDistrict;
+
+  constructor(private route: Router) {
+  }
+
+  goToDetail() {
+    this.route.navigate([`/district-detail/` + this.district.id.toString()])
+  }
 }

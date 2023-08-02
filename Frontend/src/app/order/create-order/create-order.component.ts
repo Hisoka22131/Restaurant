@@ -3,6 +3,8 @@ import {DishOrderService} from "../../services/dish-order/dish-order.service";
 import {IDish} from "../../dish/IDish";
 import {DishOrder} from "../../dishes-order/DishOrder";
 import {CommonService} from "../../services/common.service";
+import {OrderService} from "../../services/order/order.service";
+import {AlertifyService} from "../../services/view/alertify.service";
 
 @Component({
   selector: 'app-create-dish-order',
@@ -16,6 +18,8 @@ export class CreateOrderComponent implements OnInit {
   currentOrder: Array<DishOrder> = [];
 
   constructor(private dishOrderService: DishOrderService,
+              private orderService: OrderService,
+              private alertifyService: AlertifyService,
               public commonService: CommonService) {
     this.selectedDishes = this.dishOrderService.getSelectedDishes();
     this.currentOrder = this.dishOrderService.getCurrentOrder();
@@ -39,7 +43,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   createOrder() {
-    console.log(this.dishOrderService.getCurrentOrder())
+    this.orderService.createOrder(this.currentOrder).subscribe(data => this.alertifyService.success("Заказ создан"));
   }
 
 }

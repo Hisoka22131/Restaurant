@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IDeliveryMan} from "../IDeliveryMan";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-delivery-man-card',
@@ -9,4 +10,11 @@ import {IDeliveryMan} from "../IDeliveryMan";
 export class DeliveryManCardComponent {
 
   @Input() deliveryMan: IDeliveryMan
+
+  constructor(private route: Router) {
+  }
+
+  goToDetail() {
+    this.route.navigate([`/delivery-man-detail/` + this.deliveryMan.id.toString()])
+  }
 }
