@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Backend.Dto.Base;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Backend.Dto.Auth.Login;
 
-public class LoginResponseDto
+public class LoginResponseDto : EntityDto
 {
     public string Email { get; set; }
     public string Token { get; set; }

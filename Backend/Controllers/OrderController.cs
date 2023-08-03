@@ -22,9 +22,14 @@ public class OrderController : ControllerBase
     public async Task<IEnumerable<OrderDto>> Get() => await _orderService.GetEntities();
 
     [HttpGet]
-    [Route("get-my-orders/{clientId:int}")]
+    [Route("get-my-orders/{userId:int}")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
     public async Task<IEnumerable<OrderListDto>> Get(int clientId) => await _orderService.Get(clientId);
+    
+    [HttpGet]
+    [Route("get-all-orders/{userId:int}")]
+    [Authorize(Roles = Role.ClientOrAdmin)]
+    public async Task<IEnumerable<OrderListDto>> GetForAdmin(int userId) => await _orderService.Get(userId);
 
     [HttpGet]
     [Route("get-order/{id:int}")]

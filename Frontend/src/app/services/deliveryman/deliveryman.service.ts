@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IDeliveryMan} from "../../deliveryman/IDeliveryMan";
 import {DatePipe} from "@angular/common";
+import {CreateDeliveryMan} from "../../deliveryman/CreateDeliveryMan";
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +54,10 @@ export class DeliverymanService implements AbstractService {
     };
     return this.http.post<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/send-deliveryman", deliveryMan, httpOptions)
   }
+
+  createEntity(deliveryMan: CreateDeliveryMan){
+    return this.http.post<CreateDeliveryMan>(this.baseApiUrl + "/deliveryMan/create-deliveryman", deliveryMan)
+
+  }
+
 }

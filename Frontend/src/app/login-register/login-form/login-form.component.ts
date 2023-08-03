@@ -25,7 +25,8 @@ export class LoginFormComponent {
         if (user) {
           localStorage.setItem('token', user.token);
           localStorage.setItem('email', user.email);
-          this.alertifyService.success('Login Successful');
+          localStorage.setItem('userId', user.id.toString());
+          this.alertifyService.success('Вы успешно вошли');
           this.router.navigate(['/']);
           this.authService.setCurrentUser(user);
         }

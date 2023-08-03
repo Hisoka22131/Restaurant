@@ -2,13 +2,15 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest} from '@angular/c
 import {Injectable} from '@angular/core';
 import {catchError, Observable, throwError} from 'rxjs';
 import {AlertifyService} from "./view/alertify.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptorService {
 
-  constructor(private alertify: AlertifyService) {
+  constructor(private alertify: AlertifyService,
+              private router: Router) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -23,35 +25,23 @@ export class HttpErrorInterceptorService {
     // Передаем измененный запрос дальше по цепочке обработки
     return next.handle(modifiedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.alertify.error(this.setError(error));
+        this.checkError(error);
         return throwError(error);
       })
     );
   }
 
-  setError(error: HttpErrorResponse): string {
-    let errorMessage = 'Unknown error occured';
-    if (error.error instanceof ErrorEvent) {
-      // Client side error
-      errorMessage = error.error.message;
-    } else {
-      // server side error
-      if (error?.status === 401) {
-        return error.statusText;
-      }
-
-      if (error?.error?.errorMessage && error?.status !== 0) {
-        {
-          errorMessage = error?.error?.errorMessage;
-        }
-      }
-
-      if (!error?.error?.errorMessage && error?.error && error?.status !== 0) {
-        {
-          errorMessage = error?.error;
-        }
-      }
+  checkError(error: HttpErrorResponse){
+    if (error.status === 401) {
+      // Перенаправляем на страницу авторизации
+      this.router.navigate(['/login']);
+      this.alertify.warning("Необходима авторизация");
     }
-    return errorMessage;
+
+    if (error.status === 403) {
+      this.router.navigate(['/dish-list']);
+      this.alertify.message("У вас нет доступа к текущем ресурсу");
+    }
+
   }
 }

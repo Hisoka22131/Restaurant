@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Backend.Dto.Base;
 using Backend.Dto.Client;
 using Backend.Services.Interfaces;
 using Core.Domain;
@@ -13,6 +14,7 @@ public class ClientService : IClientService
 {
     private readonly IUnitOfWork _unitOfWork;
     private IClientRepository _clientRepository => _unitOfWork.ClientRepository;
+    private IRoleRepository _roleRepository => _unitOfWork.RoleRepository;
 
     public ClientService(IUnitOfWork unitOfWork)
     {
@@ -48,6 +50,25 @@ public class ClientService : IClientService
     {
         var entity = _clientRepository.GetClient(id);
         _clientRepository.Remove(entity);
+        _unitOfWork.Save();
+    }
+    
+    public void CreateClient(User user, PersonalInfoBaseDto dto)
+    {
+        var client = new Client()
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Birthday = dto.Birthday,
+            PassportSeries = dto.PassportSeries,
+            City = dto.City,
+            Address = dto.Address,
+            PhoneNumber = dto.PhoneNumber,
+            User = user,
+            DiscountPercentage = 0
+        };
+        user.Roles.Add(_roleRepository.GetClientRole());
+        _clientRepository.Insert(client);
         _unitOfWork.Save();
     }
 }

@@ -35,4 +35,9 @@ public class DeliveryManController : ControllerBase
     [Route("delete-deliveryman/{id:int}")]
     [Authorize(Roles = Role.Admin)]
     public void DeleteDeliveryMan(int id) => _deliveryManService.PostDelete(id);
+    
+    [HttpPost]
+    [Route("create-deliveryman")]
+    [Authorize(Roles = Role.Admin)]
+    public void CreateDeliveryMan(CreateDeliveryManDto dto) => _deliveryManService.CreateDeliveryMan(dto);
 }

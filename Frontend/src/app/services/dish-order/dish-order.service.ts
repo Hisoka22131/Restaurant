@@ -77,4 +77,10 @@ export class DishOrderService implements AbstractService {
       this.currentOrder.splice(this.currentOrder.indexOf(dishOrder), 1);
     }
   }
+
+  setNullDishOrder()
+  {
+    this.currentOrder = [];
+    this.selectedDishes = [];
+  }
 }

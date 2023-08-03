@@ -1,1 +1,18 @@
-<p>order-list works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Номер заказа</th>
+    <th scope="col">Стоимость</th>
+    <th scope="col">Клиент</th>
+    <th scope="col">Курьер</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let order of orderList">
+    <tr>
+      <td>{{order.number}}</td>
+      <td>{{order.price}}</td>
+      <td>{{order.clientFullName}}</td>
+      <td>{{order.deliveryManFullName}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AlertifyService} from "../services/view/alertify.service";
 import {DishOrderService} from "../services/dish-order/dish-order.service";
+import {TokenService} from "../services/token.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,20 +9,16 @@ import {DishOrderService} from "../services/dish-order/dish-order.service";
 })
 export class NavBarComponent {
 
-  constructor(private alertify: AlertifyService,
-              private dishOrderService: DishOrderService) {
+  constructor(private dishOrderService: DishOrderService,
+              private tokenService: TokenService) {
   }
 
-  loggedInUser!: string;
-
   loggedIn() {
-    this.loggedInUser = localStorage.getItem('token') as string;
-    return this.loggedInUser;
+    return this.tokenService.loggedIn();
   }
 
   onLogout() {
-    localStorage.removeItem('token');
-    this.alertify.success('Вы вышли !');
+    this.tokenService.onLogout();
   }
 
   getCount(): number {

@@ -8,5 +8,6 @@ namespace Backend.Services.Interfaces;
 public interface IOrderService : IBaseService<Order, OrderDto>
 {
     Task<IEnumerable<OrderListDto>> Get(int clientId);
-    void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos);
+    Task CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos);
+    Task<IEnumerable<OrderListDto>> GetForAdmin();
 }

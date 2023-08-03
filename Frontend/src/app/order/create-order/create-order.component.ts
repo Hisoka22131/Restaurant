@@ -5,6 +5,7 @@ import {DishOrder} from "../../dishes-order/DishOrder";
 import {CommonService} from "../../services/common.service";
 import {OrderService} from "../../services/order/order.service";
 import {AlertifyService} from "../../services/view/alertify.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-dish-order',
@@ -20,7 +21,8 @@ export class CreateOrderComponent implements OnInit {
   constructor(private dishOrderService: DishOrderService,
               private orderService: OrderService,
               private alertifyService: AlertifyService,
-              public commonService: CommonService) {
+              public commonService: CommonService,
+              private router: Router) {
     this.selectedDishes = this.dishOrderService.getSelectedDishes();
     this.currentOrder = this.dishOrderService.getCurrentOrder();
   }
@@ -43,7 +45,11 @@ export class CreateOrderComponent implements OnInit {
   }
 
   createOrder() {
-    this.orderService.createOrder(this.currentOrder).subscribe(data => this.alertifyService.success("Заказ создан"));
+    this.orderService.createOrder(this.currentOrder).subscribe(data => {
+      this.dishOrderService.setNullDishOrder();
+      this.alertifyService.success("Заказ создан")
+      this.router.navigate(["/dish-list"])
+    });
   }
 
 }

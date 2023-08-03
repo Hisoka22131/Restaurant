@@ -23,6 +23,10 @@ export class AuthService {
     this.currentUser = user;
   }
 
+  getUserId(){
+    return Number(localStorage.getItem('userId'));
+  }
+
   authUser(user: IUserForLogin) {
     return this.http.post(this.baseApiUrl + '/auth/login', user);
   }

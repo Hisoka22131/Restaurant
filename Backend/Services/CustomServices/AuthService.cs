@@ -22,11 +22,13 @@ public class AuthService : IAuthService
     private IUserRepository _userRepository => _unitOfWork.UserRepository;
     private IClientRepository _clientRepository => _unitOfWork.ClientRepository;
     private IRoleRepository _roleRepository => _unitOfWork.RoleRepository;
+    private IClientService _clientService;
 
-    public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration)
+    public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration, IClientService clientService)
     {
         _configuration = configuration;
         _unitOfWork = unitOfWork;
+        _clientService = clientService;
     }
 
     public async Task<IActionResult> Login(LoginRequestDto request)
@@ -38,6 +40,7 @@ public class AuthService : IAuthService
 
         var response = new LoginResponseDto()
         {
+            Id = user.Id,
             Email = user.Email,
             Token = JwtHelper.CreateJwt(user, _configuration)
         };
@@ -61,26 +64,7 @@ public class AuthService : IAuthService
 
     public async Task<IActionResult> RegisterClient(UserRegisterDto dto)
     {
-        CreateClient(await Register(dto.Email, dto.Password), dto);
+        _clientService.CreateClient(await Register(dto.Email, dto.Password), dto);
         return new StatusCodeResult(201);
-    }
-
-    private void CreateClient(User user, PersonalInfoBaseDto dto)
-    {
-        var client = new Client()
-        {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Birthday = dto.Birthday,
-            PassportSeries = dto.PassportSeries,
-            City = dto.City,
-            Address = dto.Address,
-            PhoneNumber = dto.PhoneNumber,
-            User = user,
-            DiscountPercentage = 0
-        };
-        user.Roles.Add(_roleRepository.GetEntities().First(q => q.Name == Role.Client));
-        _clientRepository.Insert(client);
-        _unitOfWork.Save();
     }
 }
