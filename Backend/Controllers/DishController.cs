@@ -22,17 +22,17 @@ public class DishController : ControllerBase
     [AllowAnonymous]
     public async Task<IEnumerable<DishDto>> Get() => await _dishService.GetEntities();
 
-    [HttpPost]
+    [HttpGet]
     [Route("get-dish/{id:int}")]
     public async Task<DishDto> Get(int id) => await _dishService.GetEntity(id);
 
     [HttpPost]
-    [Route("post-dish")]
+    [Route("send-dish")]
     [Authorize(Roles = Role.Admin)]
     public void PostDish(DishDto dto) => _dishService.PostEntity(dto);
 
     [HttpDelete]
-    [Route("delete-dish")]
+    [Route("delete-dish/{id:int}")]
     [Authorize(Roles = Role.Admin)]
     public void DeleteDish(int id) => _dishService.PostDelete(id);
 
@@ -43,6 +43,6 @@ public class DishController : ControllerBase
     
     [HttpGet]
     [Route("get-dish-image/{id:int}")]
-    [Authorize(Roles = Role.Admin)]
+    [AllowAnonymous]
     public async Task<IActionResult> GetImage(int id) => await _dishService.GetImage(id);
 }

@@ -13,6 +13,5 @@ public partial class Client : PersonalInfoBase
 
     public string? ImagePath { get; set; }
     public int? DiscountPercentage { get; set; }
-
     public virtual ICollection<Order> Orders { get; set; } 
 }

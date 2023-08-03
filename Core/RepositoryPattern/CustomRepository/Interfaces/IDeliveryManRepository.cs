@@ -6,4 +6,5 @@ namespace Core.RepositoryPattern.CustomRepository.Interfaces;
 public interface IDeliveryManRepository : IGenericRepository<DeliveryMan>
 {
     DeliveryMan GetDeliveryMan(int id);
+    (int min, int max) GetMaxMinId();
 }

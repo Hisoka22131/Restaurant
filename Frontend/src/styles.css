@@ -1,0 +1,29 @@
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import "../src/app/customStyles/errors.css";
+@import "../src/app/customStyles/button.css";
+
+.alertify .ajs-content {
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+.lightGrey {
+  background-color: #f0f0f0;
+}
+
+.bg-grey {
+  background-color: #f0f0f0;
+}
+
+h1 {
+  color: #fff;
+}
+
+.lead {
+  color: #aaa;
+}
+
+.wrapper {
+  margin: 10vh
+}

@@ -12,5 +12,6 @@ public interface IUnitOfWork: IDisposable
     IDishesOrderRepository DishesOrderRepository { get; set; }
     IDeliveryManRepository DeliveryManRepository { get; set; }
     IUserRepository UserRepository { get; set; }
+    IRoleRepository RoleRepository { get; set; }
     int Save();
 }

@@ -9,7 +9,7 @@ public partial class Order : EntityBase, IValidatableObject
 {
     public Order()
     {
-        DishesOrders = new HashSet<DishesOrder>();
+        DishesOrders = new HashSet<DishOrder>();
     }
 
     public string Number { get; set; }
@@ -20,5 +20,5 @@ public partial class Order : EntityBase, IValidatableObject
     public virtual Client Client { get; set; }
     public int DeliveryManId { get; set; }
     public virtual DeliveryMan DeliveryMan { get; set; }
-    public virtual ICollection<DishesOrder> DishesOrders { get; set; }
+    public virtual ICollection<DishOrder> DishesOrders { get; set; }
 }

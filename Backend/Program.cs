@@ -20,7 +20,8 @@ builder.Services
     .AddUnitOfWork()
     .AddCustomServices()
     .AddCustomSwaggerGen()
-    .AddCustomAuthService(builder.Configuration);
+    .AddCustomAuthService(builder.Configuration)
+    .AddHttpContextAccessor();
 
 #endregion
 

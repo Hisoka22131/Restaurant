@@ -1,0 +1,65 @@
+[
+  {
+    "id": 2,
+    "name": "Tomato soup",
+    "type": "Суп",
+    "taggingDish": 0,
+    "price": 2
+  },
+  {
+    "id": 3,
+    "name": "Chicken broth",
+    "type": "Жаркое",
+    "taggingDish": 0,
+    "price": 1.5
+  },
+  {
+    "id": 4,
+    "name": "Onion soup",
+    "type": "Суп",
+    "taggingDish": 0,
+    "price": 2.3
+  },
+  {
+    "id": 5,
+    "name": "Chips",
+    "type": "Чипсы",
+    "taggingDish": 0,
+    "price": 3
+  },
+  {
+    "id": 6,
+    "name": "Nicoise salad",
+    "type": "Салат",
+    "taggingDish": 0,
+    "price": 3.2
+  },
+  {
+    "id": 7,
+    "name": "Nachos",
+    "type": "Чипсы",
+    "taggingDish": 0,
+    "price": 2.99
+  },
+  {
+    "id": 8,
+    "name": "BBQ ribs",
+    "type": "Жаркое",
+    "taggingDish": 0,
+    "price": 1.99
+  },
+  {
+    "id": 9,
+    "name": "Pasta Carbonara",
+    "type": "Паста",
+    "taggingDish": 0,
+    "price": 4.3
+  },
+  {
+    "id": 10,
+    "name": "Roast chicken and potatoes",
+    "type": "Жаркое",
+    "taggingDish": 0,
+    "price": 5.2
+  }
+]

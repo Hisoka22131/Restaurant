@@ -6,4 +6,5 @@ namespace Backend.Services.Interfaces;
 
 public interface IDeliveryManService : IBaseService<DeliveryMan, DeliveryManDto>
 {
+    Task CreateDeliveryMan(CreateDeliveryManDto dto);
 }

@@ -1,0 +1,98 @@
+<div class="row mb-5">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header"><h3>Клиент №{{client.id}}</h3></div>
+      <div class="card-body">
+        <form [formGroup]="clientForm">
+          <div>
+            <div class="form-group col-12">
+              <label for="firstName">Имя:</label>
+              <input id="firstName" type="text" class="form-control" formControlName="firstName"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('firstName')) }"/>
+              <div>
+                <div class="error-message" *ngIf="clientForm.get('firstName')?.errors?.['required']">Поле 'Имя' должно
+                  быть заполнено
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="lastName">Фамилия:</label>
+              <input id="lastName" type="text" class="form-control" formControlName="lastName"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('lastName'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('lastName')?.errors?.['required']">Поле 'Фамилия'
+                должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="passportSeries">Серия паспорта:</label>
+              <input id="passportSeries" type="text" class="form-control" formControlName="passportSeries"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('passportSeries'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('passportSeries')?.errors?.['required']">Поле 'Серия
+                паспорта' должно быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="phoneNumber">Номер телефона:</label>
+              <input id="phoneNumber" type="text" class="form-control" formControlName="phoneNumber"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('phoneNumber'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('phoneNumber')?.errors?.['required']">Поле 'Номер
+                телефона' должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="birthday">Дата рождения:</label>
+              <input id="birthday" type="date" class="form-control" formControlName="birthday"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('birthday'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('birthday')?.errors?.['required']">Поле 'Дата рождения'
+                должно быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="address">Адрес:</label>
+              <input id="address" type="text" class="form-control" formControlName="address"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('address'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('address')?.errors?.['required']">Поле 'Адрес' должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="city">Город</label>
+              <input id="city" type="text" class="form-control" formControlName="city"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('city'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('city')?.errors?.['required']">Поле 'Город' должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <label for="discountPercentage">Скидка:</label>
+              <input id="discountPercentage" type="number" class="form-control" formControlName="discountPercentage"
+                     [ngClass]="{ 'is-invalid': formService.isEmpty(clientForm.get('discountPercentage'))}"/>
+              <div class="error-message" *ngIf="clientForm.get('discountPercentage')?.errors?.['required']">Поле 'Скидка' должно
+                быть заполнено
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <button [disabled]="clientForm.invalid" type="submit" class="btn btn-primary" (click)="postClient()">Сохранить</button>
+              <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
+            </div>
+            <div class="form-group col-12">
+              <button [disabled]="clientForm.invalid" type="submit" class="btn btn-danger" (click)="deleteClient()">
+                Удалить
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card-header">
+      Предпросмотр
+      <div>
+        <app-client-card [client]="clientForm.value"></app-client-card>
+      </div>
+    </div>
+  </div>
+</div>

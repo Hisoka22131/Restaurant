@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Domain.Base;
 using Core.RepositoryPattern.CustomRepository.Interfaces;
 using Core.RepositoryPattern.GenericRepository;
 using Microsoft.EntityFrameworkCore;

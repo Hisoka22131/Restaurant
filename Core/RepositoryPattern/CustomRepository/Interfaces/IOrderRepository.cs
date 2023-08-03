@@ -6,7 +6,8 @@ namespace Core.RepositoryPattern.CustomRepository.Interfaces;
 public interface IOrderRepository : IGenericRepository<Order>
 {
     Order GetOrder(int id);
-    IEnumerable<Order> GetOrders();
+    IEnumerable<Order> GetIncludeOrders();
     IEnumerable<Order> GetClientOrders(Client client);
     IEnumerable<Order> GetClientOrders(int clientId);
+    IEnumerable<Order> GetClientOrders(User user);
 }

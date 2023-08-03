@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Backend.Services.CustomServices;
@@ -29,7 +30,8 @@ public static class ServiceProviderExtensions
             .AddScoped<IDeliveryManService, DeliveryManService>()
             .AddScoped<IDishService, DishService>()
             .AddScoped<IOrderService, OrderService>()
-            .AddScoped<IAuthService, AuthService>();
+            .AddScoped<IAuthService, AuthService>()
+            .AddScoped<IUserService, UserService>();
     }
 
     /// <summary>
@@ -53,7 +55,9 @@ public static class ServiceProviderExtensions
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = key
+                    IssuerSigningKey = key,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(180)
                 };
             });
         return services;

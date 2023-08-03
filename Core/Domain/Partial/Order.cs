@@ -28,13 +28,13 @@ public partial class Order
     {
         foreach (var dish in dishes)
         {
-            var dishesOrder = DishesOrders.FirstOrDefault(q => q.DishesId == dish.Id);
+            var dishesOrder = DishesOrders.FirstOrDefault(q => q.DishId == dish.Id);
             if (dishesOrder != null)
                 dishesOrder.Count++;
             else
-                DishesOrders.Add(new DishesOrder()
+                DishesOrders.Add(new DishOrder()
                 {
-                    Dishes = dish,
+                    Dish = dish,
                     Order = this,
                     Count = dishes.Count(q => q.Id == dish.Id)
                 });

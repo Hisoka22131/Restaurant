@@ -1,0 +1,17 @@
+<div class="card text-dark card-has-bg click-col" (click)="goToDetail()"
+     style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
+  <div class="card-img-overlay d-flex flex-column">
+    <div class="card-body">
+      <small class="card-meta mb-2"></small>
+      <h4 class="card-title mt-0 ">{{deliveryMan.firstName + ' ' + deliveryMan.lastName}}</h4>
+      <small><i class="fa-solid fa-phone"></i>{{deliveryMan.phoneNumber}}</small>
+    </div>
+    <div class="card-footer">
+      <div class="media">
+        <img class="mr-4 rounded-circle"
+             src="https://assets.codepen.io/460692/internal/avatars/users/default.png?format=auto&version=1688931977&width=80&height=80"
+             alt="Generic placeholder image" style="max-width:70px">
+      </div>
+    </div>
+  </div>
+</div>

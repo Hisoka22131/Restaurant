@@ -18,21 +18,26 @@ public class DeliveryManController : ControllerBase
 
     [HttpGet]
     [Route("get-deliverymans")]
-    [Authorize(Roles = Role.DeliveryMan)]
+    [Authorize(Roles = Role.DeliveryManOrAdmin)]
     public async Task<IEnumerable<DeliveryManDto>> Get() => await _deliveryManService.GetEntities();
 
-    [HttpPost]
-    [Route("get-deliveryman")]
-    [Authorize(Roles = Role.DeliveryMan)]
+    [HttpGet]
+    [Route("get-deliveryman/{id:int}")]
+    [Authorize(Roles = Role.DeliveryManOrAdmin)]
     public async Task<DeliveryManDto> Get(int id) => await _deliveryManService.GetEntity(id);
 
     [HttpPost]
-    [Route("post-deliveryman")]
+    [Route("send-deliveryman")]
     [Authorize(Roles = Role.Admin)]
     public void PostDeliveryMan(DeliveryManDto dto) => _deliveryManService.PostEntity(dto);
 
     [HttpDelete]
-    [Route("delete-deliveryman")]
+    [Route("delete-deliveryman/{id:int}")]
     [Authorize(Roles = Role.Admin)]
     public void DeleteDeliveryMan(int id) => _deliveryManService.PostDelete(id);
+    
+    [HttpPost]
+    [Route("create-deliveryman")]
+    [Authorize(Roles = Role.Admin)]
+    public void CreateDeliveryMan(CreateDeliveryManDto dto) => _deliveryManService.CreateDeliveryMan(dto);
 }

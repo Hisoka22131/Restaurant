@@ -187,6 +187,9 @@ namespace Core.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<byte>("TaggingDish")
                         .HasColumnType("tinyint");
 
@@ -202,7 +205,7 @@ namespace Core.Migrations
                     b.ToTable("Dishes");
                 });
 
-            modelBuilder.Entity("Core.Domain.DishesOrder", b =>
+            modelBuilder.Entity("Core.Domain.DishOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,7 +216,7 @@ namespace Core.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<int>("DishesId")
+                    b.Property<int>("DishId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
@@ -223,7 +226,7 @@ namespace Core.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex(new[] { "DishesId", "OrderId" }, "NonClusteredIndex-20230221-095146");
+                    b.HasIndex(new[] { "DishId", "OrderId" }, "NonClusteredIndex-20230221-095146");
 
                     b.ToTable("DishesOrders");
                 });
@@ -388,11 +391,11 @@ namespace Core.Migrations
                     b.Navigation("DeliveryMan");
                 });
 
-            modelBuilder.Entity("Core.Domain.DishesOrder", b =>
+            modelBuilder.Entity("Core.Domain.DishOrder", b =>
                 {
-                    b.HasOne("Core.Domain.Dish", "Dishes")
+                    b.HasOne("Core.Domain.Dish", "Dish")
                         .WithMany("DishesOrders")
-                        .HasForeignKey("DishesId")
+                        .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_DishesOrders_Dishes");
@@ -404,7 +407,7 @@ namespace Core.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_DishesOrders_Order");
 
-                    b.Navigation("Dishes");
+                    b.Navigation("Dish");
 
                     b.Navigation("Order");
                 });

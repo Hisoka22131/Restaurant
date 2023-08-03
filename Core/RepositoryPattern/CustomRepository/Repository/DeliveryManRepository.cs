@@ -13,4 +13,10 @@ public class DeliveryManRepository : GenericRepository<DeliveryMan>, IDeliveryMa
 
     public DeliveryMan GetDeliveryMan(int id) =>
         GetEntity(c => c.Id == id, c => c.District, c => c.DeliveryManVacations, c => c.Orders, c => c.User);
+
+    public (int min, int max) GetMaxMinId()
+    {
+       var ids =  GetEntities().Select(q => q.Id);
+       return (ids.Min(), ids.Max());
+    }
 }

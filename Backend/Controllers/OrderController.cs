@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Backend.Dto.DishOrder;
 using Backend.Dto.Order;
 using Backend.Services.Interfaces;
 using Core.Domain;
@@ -21,11 +22,16 @@ public class OrderController : ControllerBase
     public async Task<IEnumerable<OrderDto>> Get() => await _orderService.GetEntities();
 
     [HttpGet]
-    [Route("get-my orders/{clientId:int}")]
+    [Route("get-my-orders/{userId:int}")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
     public async Task<IEnumerable<OrderListDto>> Get(int clientId) => await _orderService.Get(clientId);
+    
+    [HttpGet]
+    [Route("get-all-orders/{userId:int}")]
+    [Authorize(Roles = Role.ClientOrAdmin)]
+    public async Task<IEnumerable<OrderListDto>> GetForAdmin(int userId) => await _orderService.Get(userId);
 
-    [HttpPost]
+    [HttpGet]
     [Route("get-order/{id:int}")]
     [Authorize(Roles = Role.Admin)]
     public async Task<OrderDto> GetEntity(int id) => await _orderService.GetEntity(id);
@@ -39,4 +45,10 @@ public class OrderController : ControllerBase
     [Route("delete-order")]
     [Authorize(Roles = Role.DeliveryManOrClient)]
     public void DeleteOrder(int id) => _orderService.PostDelete(id);
+
+    [HttpPost]
+    [Route("create-order")]
+    [Authorize(Roles = Role.ClientOrAdmin)]
+    public void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos) => _orderService.CreateOrder(dishOrderDtos);
+
 }

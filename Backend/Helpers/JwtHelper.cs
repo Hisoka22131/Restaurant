@@ -23,13 +23,13 @@ public static class JwtHelper
         };
         claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
 
-        var signingCredetials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(180),
-            SigningCredentials = signingCredetials
+            SigningCredentials = signingCredentials
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

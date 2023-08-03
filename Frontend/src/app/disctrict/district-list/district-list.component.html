@@ -1,0 +1,12 @@
+<section class="wrapper">
+  <div class="container">
+    <div class="form-group col-12">
+      <a href="/district-detail/0" class="btn btn-success" style="margin-bottom: 10px">Добавить район</a>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let district of districts">
+        <app-district-card [district]="district"></app-district-card>
+      </div>
+    </div>
+  </div>
+</section>

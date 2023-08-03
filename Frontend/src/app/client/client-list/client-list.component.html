@@ -1,0 +1,12 @@
+<section class="wrapper">
+  <div class="container">
+    <div class="form-group col-12">
+      <a href="/client-detail/0" class="btn btn-success" style="margin-bottom: 10px">Добавить клиента</a>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let client of clients">
+        <app-client-card [client]="client"></app-client-card>
+      </div>
+    </div>
+  </div>
+</section>

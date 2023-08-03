@@ -1,0 +1,12 @@
+<section class="wrapper">
+  <div class="container">
+    <div class="form-group col-12">
+      <button class="btn btn-success" (click)="openModal()" style="margin-bottom: 10px">Добавить курьера</button>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let deliveryMan of deliveryMans">
+        <app-delivery-man-card [deliveryMan]="deliveryMan"></app-delivery-man-card>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+<div class="card text-dark card-has-bg click-col" (click)="onAddToOrder()"
+     style="background-image:url('https://source.unsplash.com/600x900/?tech,street');"
+     title="нажми на меня">
+  <div class="card-img-overlay d-flex flex-column">
+    <div class="card-body">
+      <small class="card-meta mb-2">{{dish.type}}</small>
+      <h4 class="card-title mt-0 ">{{dish.name}}</h4>
+    </div>
+    <div class="card-footer">
+      <div class="media">
+        <div class="media-body">
+          <h6 class="my-0 text-dark d-block"><a class="text-dark" [routerLinkActiveOptions]="{exact: true}"
+                                                routerLinkActive="active" routerLink="/dish-detail/{{dish.id}}"
+                                                style="text-decoration: none">Подробнее</a></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
