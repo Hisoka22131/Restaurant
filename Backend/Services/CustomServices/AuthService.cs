@@ -29,19 +29,20 @@ public class AuthService : IAuthService
     {
         var user = await _userRepository.Authenticate(request.Email, request.Password);
 
-        // Unauthorized
         if (user == null) return null;
 
         var response = new LoginResponseDto()
         {
             Id = user.Id,
             Email = user.Email,
-            Token = JwtHelper.CreateJwt(user, _configuration)
+            Token = await CreateToken(user)
         };
 
         // Ok
         return response;
     }
+
+    public async Task<string> CreateToken(User user) => JwtHelper.CreateJwt(user, _configuration);
     
     public async Task<User> Register(string email, string password)
     {

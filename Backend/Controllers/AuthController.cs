@@ -20,6 +20,8 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(LoginRequestDto request)
     {
         var response = await _authService.Login(request);
+        if (response == null) return Ok("Введите валидные данные");
+        
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
