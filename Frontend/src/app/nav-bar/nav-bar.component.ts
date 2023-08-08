@@ -22,8 +22,7 @@ export class NavBarComponent {
   onLogout() {
     this.authService.logout()
       .subscribe(() => {
-        this.alertifyService.success("Вы успешно вышли")
-        debugger
+        this.alertifyService.success(`До свидания, ${this.authService.getCurrentUser().email}`)
         this.authService.deleteUserInCookie();
       });
   }

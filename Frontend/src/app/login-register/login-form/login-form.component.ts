@@ -27,10 +27,12 @@ export class LoginFormComponent {
         if (user) {
           this.cookieService.set("userId", user.id.toString())
           this.cookieService.set("userEmail", user.email)
-          this.alertifyService.success('Вы успешно вошли');
+          this.alertifyService.success(`Здравствуйте, ${user.email}`);
           this.router.navigate(['/']);
           this.authService.setCurrentUser(user);
         }
+      }, (error) => {
+        this.alertifyService.error('Произошла ошибка при авторизации');
       });
   }
 

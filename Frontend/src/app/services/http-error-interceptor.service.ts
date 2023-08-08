@@ -44,5 +44,9 @@ export class HttpErrorInterceptorService {
       this.router.navigate(['/dish-list']);
       this.alertify.message("У вас нет доступа к текущем ресурсу");
     }
+
+    if (error.status === 500) {
+      this.alertify.error("Произошла ошибка на сервере");
+    }
   }
 }
