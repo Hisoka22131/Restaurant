@@ -19,8 +19,15 @@ public class AuthController : ControllerBase
     [Route("login")]
     public async Task<IActionResult> Login(LoginRequestDto request)
     {
-        var response = await _authService.Login(request);
-        if (response == null) return Ok("Введите валидные данные");
+        var user = await _authService.Login(request);
+        if (user == null) return Ok("Введите валидные данные");
+        
+        var response = new LoginResponseDto()
+        {
+            Id = user.Id,
+            Email = user.Email,
+            Roles = user.Roles.Select(q => q.Name)
+        };
         
         var cookieOptions = new CookieOptions
         {
@@ -30,9 +37,9 @@ public class AuthController : ControllerBase
             IsEssential = true,
             SameSite = SameSiteMode.None
         };
-        HttpContext.Response.Cookies.Append("restCookie", response.Token, cookieOptions);
+        HttpContext.Response.Cookies.Append("restCookie", await _authService.CreateToken(user), cookieOptions);
         
-        return new OkObjectResult(new {response.Id, response.Email});
+        return new OkObjectResult(response);
     }
     
     [HttpPost]

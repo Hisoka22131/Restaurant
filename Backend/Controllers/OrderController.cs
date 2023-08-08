@@ -22,13 +22,13 @@ public class OrderController : ControllerBase
     public async Task<IEnumerable<OrderDto>> Get() => await _orderService.GetEntities();
 
     [HttpGet]
-    [Route("get-my-orders/{userId:int}")]
-    [Authorize(Roles = Role.DeliveryManOrClient)]
+    [Route("get-my-orders/{clientId:int}")]
+    [Authorize(Roles = Role.Client)]
     public async Task<IEnumerable<OrderListDto>> Get(int clientId) => await _orderService.Get(clientId);
     
     [HttpGet]
     [Route("get-all-orders/{userId:int}")]
-    [Authorize(Roles = Role.ClientOrAdmin)]
+    [Authorize(Roles = Role.Client)]
     public async Task<IEnumerable<OrderListDto>> GetForAdmin(int userId) => await _orderService.Get(userId);
 
     [HttpGet]
@@ -38,17 +38,17 @@ public class OrderController : ControllerBase
 
     [HttpPost]
     [Route("post-order")]
-    [Authorize(Roles = Role.DeliveryManOrClient)]
+    [Authorize(Roles = Role.Client)]
     public void PostOrder(OrderDto dto) => _orderService.PostEntity(dto);
 
     [HttpDelete]
     [Route("delete-order")]
-    [Authorize(Roles = Role.DeliveryManOrClient)]
+    [Authorize(Roles = Role.Client)]
     public void DeleteOrder(int id) => _orderService.PostDelete(id);
 
     [HttpPost]
     [Route("create-order")]
-    [Authorize(Roles = Role.ClientOrAdmin)]
+    [Authorize(Roles = Role.Client)]
     public void CreateOrder(IEnumerable<CreateDishOrderDto> dishOrderDtos) => _orderService.CreateOrder(dishOrderDtos);
 
 }

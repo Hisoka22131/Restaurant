@@ -18,12 +18,12 @@ public class DeliveryManController : ControllerBase
 
     [HttpGet]
     [Route("get-delivery-mans")]
-    [Authorize(Roles = Role.DeliveryManOrAdmin)]
+    [Authorize(Roles = Role.DeliveryMan)]
     public async Task<IEnumerable<DeliveryManDto>> Get() => await _deliveryManService.GetEntities();
 
     [HttpGet]
     [Route("get-delivery-man/{id:int}")]
-    [Authorize(Roles = Role.DeliveryManOrAdmin)]
+    [Authorize(Roles = Role.DeliveryMan)]
     public async Task<DeliveryManDto> Get(int id) => await _deliveryManService.GetEntity(id);
 
     [HttpPost]

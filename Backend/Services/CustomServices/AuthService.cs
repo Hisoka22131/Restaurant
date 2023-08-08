@@ -25,22 +25,7 @@ public class AuthService : IAuthService
         _clientService = clientService;
     }
 
-    public async Task<LoginResponseDto> Login(LoginRequestDto request)
-    {
-        var user = await _userRepository.Authenticate(request.Email, request.Password);
-
-        if (user == null) return null;
-
-        var response = new LoginResponseDto()
-        {
-            Id = user.Id,
-            Email = user.Email,
-            Token = await CreateToken(user)
-        };
-
-        // Ok
-        return response;
-    }
+    public async Task<User> Login(LoginRequestDto request) => await _userRepository.Authenticate(request.Email, request.Password);
 
     public async Task<string> CreateToken(User user) => JwtHelper.CreateJwt(user, _configuration);
     
