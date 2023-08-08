@@ -46,7 +46,8 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" (click)="onLogout()">Выход</a></li>
+              <li><a class="dropdown-item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"
+                     routerLink="/login" (click)="onLogout()">Выход</a></li>
             </ul>
           </li>
         </ul>

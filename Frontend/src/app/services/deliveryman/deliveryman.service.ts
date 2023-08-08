@@ -20,44 +20,22 @@ export class DeliverymanService implements AbstractService {
   }
 
   getAllEntities(): Observable<IDeliveryMan[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.get<IDeliveryMan[]>(this.baseApiUrl + "/deliveryMan/get-deliverymans", httpOptions);
+    return this.http.get<IDeliveryMan[]>(this.baseApiUrl + "/deliveryMan/get-delivery-mans");
   }
 
   getEntity(id: number): Observable<IDeliveryMan> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.get<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/get-deliveryman/" + id.toString(), httpOptions);
+    return this.http.get<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/get-delivery-man/" + id.toString());
   }
 
   deleteEntity(id: number){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.delete<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/delete-deliveryman/" + id.toString(), httpOptions)
+    return this.http.delete<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/delete-delivery-man/" + id.toString())
   }
 
   postEntity(deliveryMan: IDeliveryMan){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.post<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/send-deliveryman", deliveryMan, httpOptions)
+    return this.http.post<IDeliveryMan>(this.baseApiUrl + "/deliveryMan/send-delivery-man", deliveryMan)
   }
 
   createEntity(deliveryMan: CreateDeliveryMan){
-    return this.http.post<CreateDeliveryMan>(this.baseApiUrl + "/deliveryMan/create-deliveryman", deliveryMan)
-
+    return this.http.post<CreateDeliveryMan>(this.baseApiUrl + "/deliveryMan/create-delivery-man", deliveryMan)
   }
-
 }

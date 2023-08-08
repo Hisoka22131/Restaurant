@@ -1,6 +1,7 @@
 using Backend.Services;
 using Core.Context;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -21,8 +22,8 @@ builder.Services
     .AddCustomServices()
     .AddCustomSwaggerGen()
     .AddCustomAuthService(builder.Configuration)
-    .AddHttpContextAccessor();
-
+    .AddHttpContextAccessor()
+    .AddCustomCors();
 #endregion
 
 var app = builder.Build();
@@ -36,8 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseCors(_ => _.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+app.UseCors("restPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 

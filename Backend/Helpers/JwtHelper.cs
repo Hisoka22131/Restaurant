@@ -28,7 +28,7 @@ public static class JwtHelper
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(180),
+            Expires = DateTime.UtcNow.AddMinutes(30),
             SigningCredentials = signingCredentials
         };
 

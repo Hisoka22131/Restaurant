@@ -1,8 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Backend.Dto.Auth.Login;
+﻿using Backend.Dto.Auth.Login;
 using Backend.Dto.User;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -21,7 +17,37 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login(LoginRequestDto request) => await _authService.Login(request);
+    public async Task<IActionResult> Login(LoginRequestDto request)
+    {
+        var response = await _authService.Login(request);
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = DateTime.Now.AddMinutes(30),
+            Secure = true,
+            IsEssential = true,
+            SameSite = SameSiteMode.None
+        };
+        HttpContext.Response.Cookies.Append("restCookie", response.Token, cookieOptions);
+        
+        return new OkObjectResult(new {response.Id, response.Email});
+    }
+    
+    [HttpPost]
+    [Route("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = DateTime.Now.AddDays(-1),
+            Secure = true,
+            IsEssential = true,
+            SameSite = SameSiteMode.None
+        };
+        HttpContext.Response.Cookies.Delete("restCookie", cookieOptions);
+        return Ok();
+    }
 
     [HttpPost]
     [Route("register")]
