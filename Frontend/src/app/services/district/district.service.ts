@@ -19,38 +19,18 @@ export class DistrictService implements AbstractService {
   private testDistrictUrl: string = 'data/district.json';
 
   getAllEntities(): Observable<IDistrict[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.get<IDistrict[]>(this.baseApiUrl + "/district/get-districts", httpOptions);
+    return this.http.get<IDistrict[]>(this.baseApiUrl + "/district/get-districts");
   }
 
   getEntity(id: number): Observable<IDistrict> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.get<IDistrict>(this.baseApiUrl + "/district/get-district/" + id.toString(), httpOptions)
+    return this.http.get<IDistrict>(this.baseApiUrl + "/district/get-district/" + id.toString())
   }
 
   deleteEntity(id: number){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.delete<IDistrict>(this.baseApiUrl + "/district/delete-district/" + id.toString(), httpOptions)
+    return this.http.delete<IDistrict>(this.baseApiUrl + "/district/delete-district/" + id.toString())
   }
 
   postEntity(district: IDistrict){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.post<IDistrict>(this.baseApiUrl + "/district/send-district", district, httpOptions)
+    return this.http.post<IDistrict>(this.baseApiUrl + "/district/send-district", district)
   }
 }

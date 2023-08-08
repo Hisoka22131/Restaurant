@@ -8,6 +8,7 @@ using Backend.Services.Interfaces;
 using Core.Domain.Base;
 using Core.RepositoryPattern.GenericRepository;
 using Core.RepositoryPattern.UoF;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,23 @@ public static class ServiceProviderExtensions
             .AddScoped<IUserService, UserService>();
     }
 
+    public static IServiceCollection AddCustomCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("restPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+        });
+
+        return services;
+    }
+    
     /// <summary>
     /// JWT
     /// </summary>
@@ -47,7 +65,12 @@ public static class ServiceProviderExtensions
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddCookie(opt => opt.Cookie.Name = "restCookie")
             .AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters()
@@ -57,7 +80,15 @@ public static class ServiceProviderExtensions
                     ValidateAudience = false,
                     IssuerSigningKey = key,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(180)
+                    ClockSkew = TimeSpan.FromMinutes(30)
+                };
+                opt.Events = new JwtBearerEvents()
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies["restCookie"];
+                        return Task.CompletedTask;
+                    }
                 };
             });
         return services;

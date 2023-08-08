@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {DishOrderService} from "../services/dish-order/dish-order.service";
-import {TokenService} from "../services/token.service";
+import {AuthService} from "../services/auth/auth.service";
+import {AlertifyService} from "../services/view/alertify.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,15 +11,20 @@ import {TokenService} from "../services/token.service";
 export class NavBarComponent {
 
   constructor(private dishOrderService: DishOrderService,
-              private tokenService: TokenService) {
+              private authService: AuthService,
+              private alertifyService: AlertifyService) {
   }
 
   loggedIn() {
-    return this.tokenService.loggedIn();
+    return this.authService.isAuth;
   }
 
   onLogout() {
-    this.tokenService.onLogout();
+    this.authService.logout()
+      .subscribe(() => {
+        this.alertifyService.success(`До свидания, ${this.authService.getCurrentUser().email}`)
+        this.authService.deleteUserInCookie();
+      });
   }
 
   getCount(): number {

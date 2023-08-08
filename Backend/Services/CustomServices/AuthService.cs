@@ -1,9 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Backend.Dto.Auth.Login;
-using Backend.Dto.Base;
+﻿using Backend.Dto.Auth.Login;
 using Backend.Dto.User;
 using Backend.Helpers;
 using Backend.Services.Interfaces;
@@ -11,7 +6,6 @@ using Core.Domain;
 using Core.RepositoryPattern.CustomRepository.Interfaces;
 using Core.RepositoryPattern.UoF;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace Backend.Services.CustomServices;
 
@@ -31,24 +25,25 @@ public class AuthService : IAuthService
         _clientService = clientService;
     }
 
-    public async Task<IActionResult> Login(LoginRequestDto request)
+    public async Task<LoginResponseDto> Login(LoginRequestDto request)
     {
         var user = await _userRepository.Authenticate(request.Email, request.Password);
 
-        // Unauthorized
-        if (user == null) return new UnauthorizedResult();
+        if (user == null) return null;
 
         var response = new LoginResponseDto()
         {
             Id = user.Id,
             Email = user.Email,
-            Token = JwtHelper.CreateJwt(user, _configuration)
+            Token = await CreateToken(user)
         };
 
         // Ok
-        return new OkObjectResult(response);
+        return response;
     }
 
+    public async Task<string> CreateToken(User user) => JwtHelper.CreateJwt(user, _configuration);
+    
     public async Task<User> Register(string email, string password)
     {
         if (await _userRepository.UserAlreadyInDatabase(email) || string.IsNullOrEmpty(email))

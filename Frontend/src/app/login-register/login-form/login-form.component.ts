@@ -4,6 +4,7 @@ import {IUserForLogin} from "../../user/IUserForLogin";
 import {AlertifyService} from "../../services/view/alertify.service";
 import {Router} from "@angular/router";
 import {FormGroup, NgForm} from "@angular/forms";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,8 @@ export class LoginFormComponent {
 
   constructor(private authService: AuthService,
               private alertifyService: AlertifyService,
-              private router: Router) {
+              private router: Router,
+              private cookieService: CookieService) {
   }
 
   login(loginForm: NgForm) {
@@ -23,13 +25,14 @@ export class LoginFormComponent {
       .subscribe(data => {
         const user = data as IUserForLogin;
         if (user) {
-          localStorage.setItem('token', user.token);
-          localStorage.setItem('email', user.email);
-          localStorage.setItem('userId', user.id.toString());
-          this.alertifyService.success('Вы успешно вошли');
+          this.cookieService.set("userId", user.id.toString())
+          this.cookieService.set("userEmail", user.email)
+          this.alertifyService.success(`Здравствуйте, ${user.email}`);
           this.router.navigate(['/']);
           this.authService.setCurrentUser(user);
         }
+      }, (error) => {
+        this.alertifyService.error('Произошла ошибка при авторизации');
       });
   }
 

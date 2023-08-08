@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
 import {AbstractService} from "../abstract/abstract.service";
 import {environment} from "../../../../environments/environments";
-import {map, Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {IDish} from '../../dish/IDish';
-import {IDistrict} from "../../disctrict/IDistrict";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DishService implements AbstractService {
-
   constructor(private http: HttpClient) {
   }
 
@@ -23,29 +21,14 @@ export class DishService implements AbstractService {
   }
 
   getEntity(id: number): Observable<IDish> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.get<IDish>(this.baseApiUrl + "/dish/get-dish/" + id.toString(), httpOptions);
+    return this.http.get<IDish>(this.baseApiUrl + "/dish/get-dish/" + id.toString());
   }
 
   deleteEntity(id: number){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.delete<IDish>(this.baseApiUrl + "/dish/delete-dish/" + id.toString(), httpOptions)
+    return this.http.delete<IDish>(this.baseApiUrl + "/dish/delete-dish/" + id.toString())
   }
 
   postEntity(dish: IDish){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-    return this.http.post<IDish>(this.baseApiUrl + "/dish/send-dish", dish, httpOptions)
+    return this.http.post<IDish>(this.baseApiUrl + "/dish/send-dish", dish)
   }
 }
