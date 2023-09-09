@@ -3,7 +3,7 @@ using Core.Domain.Base;
 
 namespace Core.Domain;
 
-public partial class DeliveryMan : PersonalInfoBase
+public partial class DeliveryMan : PersonalInfoBase, IEntityImage
 {
     public DeliveryMan()
     {

@@ -4,7 +4,7 @@ using Core.Domain.Base;
 
 namespace Core.Domain;
 
-public partial class Client : PersonalInfoBase
+public partial class Client : PersonalInfoBase, IEntityImage
 {
     public Client()
     {

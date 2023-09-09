@@ -1,18 +1,37 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DishOrderService} from "../../services/dish-order/dish-order.service";
 import {IDish} from "../IDish";
 import {DishOrder} from "../../dishes-order/DishOrder";
+import {ImageService} from "../../services/image/image.service";
 
 @Component({
   selector: 'app-dish-card',
   templateUrl: './dish-card.component.html',
   styleUrls: ['./dish-card.component.css']
 })
-export class DishCardComponent {
-  @Input() dish: IDish
-  isAddingToOrder: boolean = false;
+export class DishCardComponent implements OnInit {
 
-  constructor(private dishOrderService: DishOrderService) {
+  @Input() dish: IDish
+
+  isAddingToOrder: boolean = false;
+  imageSrc: string;
+
+  constructor(private dishOrderService: DishOrderService,
+              private imageService: ImageService) {
+  }
+
+  ngOnInit(): void {
+
+    if (!this.dish.id) return;
+
+    this.imageService.getImage(this.dish.id).subscribe((data: Blob) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+      };
+      reader.readAsDataURL(data);
+    });
+
   }
 
   onAddToOrder() {

@@ -37,6 +37,7 @@ import {LoginFormComponent} from './login-register/login-form/login-form.compone
 import {RegisterFormComponent} from './login-register/register-form/register-form.component';
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { CreateDeliveryManModalComponent } from './deliveryman/create-delivery-man-modal/create-delivery-man-modal.component';
+import {ImageService} from "./services/image/image.service";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { CreateDeliveryManModalComponent } from './deliveryman/create-delivery-m
     DishOrderService,
     AlertifyService,
     FormService,
+    ImageService,
     DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorService, multi: true},
   ],

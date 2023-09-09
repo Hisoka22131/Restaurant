@@ -8,7 +8,8 @@ namespace Backend.Services.Interfaces;
 
 public interface IAuthService
 {
-    Task<User> Login(LoginRequestDto request);
+    Task<IActionResult> Login(LoginRequestDto request, HttpContext httpContext);
+    Task<IActionResult> Logout(HttpContext httpContext);
     Task<User> Register(string email, string password);
     Task<IActionResult> RegisterClient(UserRegisterDto dto);
     Task<string> CreateToken(User user);

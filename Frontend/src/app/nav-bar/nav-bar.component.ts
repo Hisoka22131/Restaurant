@@ -22,7 +22,7 @@ export class NavBarComponent {
   onLogout() {
     this.authService.logout()
       .subscribe(() => {
-        this.alertifyService.success(`До свидания, ${this.authService.getCurrentUser().email}`)
+        this.alertifyService.success(`До свидания, ${this.authService.getUserEmail()}`)
         this.authService.deleteUserInCookie();
       });
   }

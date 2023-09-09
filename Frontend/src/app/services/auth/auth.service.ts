@@ -29,7 +29,11 @@ export class AuthService {
   }
 
   getUserId(){
-    return Number(this.currentUser.id);
+    return Number(this.cookieService.get("userId"));
+  }
+
+  getUserEmail(){
+    return this.cookieService.get("userEmail");
   }
 
   authUser(user: IUserForLogin) {

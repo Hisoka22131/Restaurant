@@ -1,10 +1,10 @@
-<div class="card text-dark card-has-bg click-col" (click)="onAddToOrder()"
-     style="background-image:url('https://source.unsplash.com/600x900/?tech,street');"
-     title="нажми на меня">
+<div class="card text-dark card-has-bg click-col" (click)="onAddToOrder()" title="нажми на меня">
   <div class="card-img-overlay d-flex flex-column">
+    <img [src]="imageSrc" class="rounded-image" height="339.33" width="312.22">
     <div class="card-body">
       <small class="card-meta mb-2">{{dish.type}}</small>
       <h4 class="card-title mt-0 ">{{dish.name}}</h4>
+      <h5 class="card-title mt-0 ">{{dish.price}} €</h5>
     </div>
     <div class="card-footer">
       <div class="media">
