@@ -4,7 +4,7 @@ using Core.Enums;
 
 namespace Core.Domain;
 
-public partial class Dish : EntityBase
+public partial class Dish : EntityBase, IEntityImage
 {
     public Dish()
     {

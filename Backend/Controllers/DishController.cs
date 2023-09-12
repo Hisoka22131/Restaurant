@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Backend.Dto.Dish;
+﻿using Backend.Dto.Dish;
 using Backend.Services.Interfaces;
 using Core.Domain;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -24,6 +22,7 @@ public class DishController : ControllerBase
 
     [HttpGet]
     [Route("get-dish/{id:int}")]
+    [Authorize(Roles = Role.Admin)]
     public async Task<DishDto> Get(int id) => await _dishService.GetEntity(id);
 
     [HttpPost]
@@ -39,8 +38,8 @@ public class DishController : ControllerBase
     [HttpPost]
     [Route("save-dish-image")]
     [Authorize(Roles = Role.Admin)]
-    public void SaveImage(IFormFile imageFile, int id) => _dishService.SaveImage(imageFile, id);
-    
+    public async Task SaveImage([FromForm] DishImageDto dto) => await _dishService.SaveImage(dto);
+
     [HttpGet]
     [Route("get-dish-image/{id:int}")]
     [AllowAnonymous]

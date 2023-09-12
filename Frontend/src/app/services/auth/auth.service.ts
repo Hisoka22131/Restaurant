@@ -29,7 +29,11 @@ export class AuthService {
   }
 
   getUserId(){
-    return Number(this.currentUser.id);
+    return Number(this.cookieService.get("userId"));
+  }
+
+  getUserEmail(){
+    return this.cookieService.get("userEmail");
   }
 
   authUser(user: IUserForLogin) {
@@ -42,6 +46,15 @@ export class AuthService {
 
   logout(){
     return this.http.post(this.baseApiUrl + '/auth/logout', {});
+  }
+
+  changePassword(password: any){
+    let user = {
+      id: this.getUserId(),
+      password: password
+    }
+
+    return this.http.put(this.baseApiUrl + "/auth/change-password", user)
   }
 
   deleteUserInCookie(){

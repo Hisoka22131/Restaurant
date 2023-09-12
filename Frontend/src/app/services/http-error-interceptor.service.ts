@@ -16,14 +16,27 @@ export class HttpErrorInterceptorService {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      withCredentials: true
-    };
 
-    const authReq = request.clone(httpOptions);
+    let authReq: HttpRequest<any>;
+
+    // Проверяем, отправляется ли файл
+    if (request.body instanceof FormData) {
+      // Для FormData не устанавливаем заголовки
+      authReq = request.clone({
+        withCredentials: true
+      });
+    } else {
+      // Если это не FormData, то устанавливаем заголовки
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+
+      authReq = request.clone({
+        headers: headers,
+        withCredentials: true
+      });
+    }
+
     // Передаем измененный запрос дальше по цепочке обработки
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -33,7 +46,7 @@ export class HttpErrorInterceptorService {
     );
   }
 
-  checkError(error: HttpErrorResponse){
+  checkError(error: HttpErrorResponse) {
     if (error.status === 401) {
       // Перенаправляем на страницу авторизации
       this.router.navigate(['/login']);
@@ -43,6 +56,10 @@ export class HttpErrorInterceptorService {
     if (error.status === 403) {
       this.router.navigate(['/dish-list']);
       this.alertify.message("У вас нет доступа к текущем ресурсу");
+    }
+
+    if (error.status === 415) {
+      this.alertify.error("Неверные данные");
     }
 
     if (error.status === 500) {

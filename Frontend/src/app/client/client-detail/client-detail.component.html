@@ -73,17 +73,21 @@
                 быть заполнено
               </div>
             </div>
-            <div class="form-group col-12">
-              <button [disabled]="clientForm.invalid" type="submit" class="btn btn-primary" (click)="postClient()">Сохранить</button>
-              <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
-            </div>
-            <div class="form-group col-12">
+            <div class="form-group col-12 mt-2">
+              <button [disabled]="clientForm.invalid" type="submit" class="btn btn-primary" (click)="postClient()" style="margin-right: 10px">Сохранить</button>
               <button [disabled]="clientForm.invalid" type="submit" class="btn btn-danger" (click)="deleteClient()">
                 Удалить
               </button>
             </div>
           </div>
         </form>
+      </div>
+      <div class="card-footer mt-2">
+        <h6 class="mb-0 bottom-word">
+          <a href="#" class="home-button text-body">
+            <i class="fas fa-long-arrow-alt-left me-2"></i>Главная
+          </a>
+        </h6>
       </div>
     </div>
   </div>

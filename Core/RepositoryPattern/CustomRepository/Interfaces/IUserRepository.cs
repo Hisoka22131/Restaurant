@@ -10,8 +10,10 @@ public interface IUserRepository : IGenericRepository<User>
     
     Task<User?> Authenticate(string email, string password);
     
-    void Register(User user, string passwordText);
+    Task Register(User user, string passwordText);
 
     Task<bool> UserAlreadyInDatabase(string userEmail);
+
+    Task ChangePassword(User user, string passwordText);
 
 }

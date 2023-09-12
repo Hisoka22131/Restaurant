@@ -32,11 +32,11 @@ public class UserRepository : GenericRepository<User>, IUserRepository
     private static bool MatchPasswordHash(string passwordText, IReadOnlyList<byte> userPassword, byte[] userPasswordKey)
     {
         using var hmac = new HMACSHA512(userPasswordKey);
-        var passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passwordText));
+        var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(passwordText));
         return !passwordHash.Where((t, i) => t != userPassword[i]).Any();
     }
 
-    public void Register(User user, string passwordText)
+    public async Task Register(User user, string passwordText)
     {
         using var hmac = new HMACSHA512();
         var passwordKey = hmac.Key;
@@ -46,6 +46,18 @@ public class UserRepository : GenericRepository<User>, IUserRepository
         user.PasswordKey = passwordKey;
         Insert(user);
     }
+
+    public async Task ChangePassword(User user, string passwordText)
+    {
+        using var hmac = new HMACSHA512();
+        var passwordKey = hmac.Key;
+        var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(passwordText));
+
+        user.Password = passwordHash;
+        user.PasswordKey = passwordKey;
+        Update(user);
+    }
+    
 
     public Task<bool> UserAlreadyInDatabase(string userEmail) => Task.FromResult(GetEntities().Any(q => q.Email == userEmail));
 }

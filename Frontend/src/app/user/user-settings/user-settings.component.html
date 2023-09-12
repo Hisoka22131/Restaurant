@@ -1,0 +1,9 @@
+<div class="row mb-2 col-3">
+  <label>Введите новый пароль</label>
+  <input class="form-control" type="text" [(ngModel)]="password" name="password">
+</div>
+<div class="row col-1">
+  <button [disabled]="!password" type="submit" class="btn btn-primary" (click)="changePassword()">
+    Сохранить
+  </button>
+</div>

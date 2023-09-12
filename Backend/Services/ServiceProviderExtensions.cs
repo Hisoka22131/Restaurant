@@ -32,7 +32,8 @@ public static class ServiceProviderExtensions
             .AddScoped<IDishService, DishService>()
             .AddScoped<IOrderService, OrderService>()
             .AddScoped<IAuthService, AuthService>()
-            .AddScoped<IUserService, UserService>();
+            .AddScoped<IUserService, UserService>()
+            .AddScoped<IImageService, ImageService>();
     }
 
     public static IServiceCollection AddCustomCors(this IServiceCollection services)

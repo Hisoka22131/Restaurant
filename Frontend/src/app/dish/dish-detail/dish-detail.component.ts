@@ -3,8 +3,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertifyService} from "../../services/view/alertify.service";
 import {FormService} from "../../services/view/form.service";
-import {IDish} from "../IDish";
+import {Dish, IDish} from "../IDish";
 import {DishService} from "../../services/dish/dish.service";
+import {ImageService} from "../../services/image/image.service";
 
 @Component({
   selector: 'app-dish-detail',
@@ -15,7 +16,7 @@ export class DishDetailComponent implements OnInit {
 
   dishForm: FormGroup;
   public dishId: number;
-  public dish: IDish = {
+  public dish: Dish = {
     id: 0,
     name: "",
     type: "",
@@ -28,7 +29,8 @@ export class DishDetailComponent implements OnInit {
     private router: Router,
     private dishService: DishService,
     private alertifyService: AlertifyService,
-    public formService: FormService) {
+    public formService: FormService,
+    private imageService: ImageService) {
     //преобразуем в Number '+*'
     this.dishId = +this.route.snapshot.params['id'];
   }
@@ -68,6 +70,19 @@ export class DishDetailComponent implements OnInit {
       taggingDish: this.dish.taggingDish,
       price: this.dish.price
     });
+  }
+
+  onFileSelected(event: any): void {
+
+    this.dishService.sendImage({
+      id: this.dishId,
+      file: event.target.files.item(0)
+    }).subscribe(() => {
+
+      this.alertifyService.success("Сохранение произошло успешно")
+      // this.imageService.updateImage(this.dishId);
+    });
+
   }
 
   postDish() {

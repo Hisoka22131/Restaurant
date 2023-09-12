@@ -12,6 +12,7 @@ import {CreateOrderComponent} from "./order/create-order/create-order.component"
 import {OrderListComponent} from "./order/order-list/order-list.component";
 import {LoginFormComponent} from "./login-register/login-form/login-form.component";
 import {RegisterFormComponent} from "./login-register/register-form/register-form.component";
+import {UserSettingsComponent} from "./user/user-settings/user-settings.component";
 
 const routes: Routes = [
   //хом
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'order-list', component: OrderListComponent},
   {path: 'login', component: LoginFormComponent},
   {path: 'register', component: RegisterFormComponent},
+  {path: 'settings', component: UserSettingsComponent},
   //в конце
   {path: '**', component: DishListComponent}
 ];

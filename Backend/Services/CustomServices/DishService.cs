@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Backend.Dto.Dish;
-using Backend.Helpers;
-using Backend.Services.Base;
+﻿using Backend.Dto.Dish;
 using Backend.Services.Interfaces;
 using Core.Domain;
 using Core.RepositoryPattern.CustomRepository.Interfaces;
 using Core.RepositoryPattern.UoF;
 using Mapster;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Backend.Services.CustomServices;
 
@@ -19,13 +13,16 @@ public class DishService : IDishService
 {
     private readonly IUnitOfWork _unitOfWork;
     private IDishRepository _dishRepository => _unitOfWork.DishRepository;
-    private readonly IWebHostEnvironment _webHostEnvironment;
-    private IDishService _dishServiceImplementation;
 
-    public DishService(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+    private readonly IImageService _imageService;
+    
+    private readonly IHostingEnvironment _webHostEnvironment;
+
+    public DishService(IUnitOfWork unitOfWork, IHostingEnvironment webHostEnvironment, IImageService imageService)
     {
         _unitOfWork = unitOfWork;
         _webHostEnvironment = webHostEnvironment;
+        _imageService = imageService;
     }
 
     public async Task<IEnumerable<DishDto>> GetEntities() => _dishRepository.GetEntities().Adapt<IEnumerable<DishDto>>();
@@ -53,33 +50,17 @@ public class DishService : IDishService
         _unitOfWork.Save();
     }
 
-    public void SaveImage(IFormFile imageFile, int id)
+    public async Task SaveImage(DishImageDto dto)
     {
-        var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-        
-        if (!Directory.Exists(imagePath))
-        {
-            Directory.CreateDirectory(imagePath);
-        }
-        
-        var fileName = Path.GetFileName(imageFile.FileName);
-        var filePath = Path.Combine(imagePath, fileName);
-        
-        using var stream = new FileStream(filePath, FileMode.Create);
-        imageFile.CopyTo(stream);
-        var relativeImagePath = Path.Combine("images", fileName);
-        var dish = _dishRepository.GetDish(id);
-        dish.ImagePath = relativeImagePath;
+        var dish = _dishRepository.GetDish(dto.Id);
+        dish.ImagePath = await _imageService.SaveImage(dto, _webHostEnvironment.WebRootPath);
         _unitOfWork.Save();
     }
 
     public async Task<IActionResult> GetImage(int id)
     {
-        var dish = _dishRepository.GetDish(id);
-        if (dish == null) throw new ArgumentException(nameof(dish));
-        
-        var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, dish.ImagePath);
-        var imageBytes = File.ReadAllBytes(imagePath);
-        return new FileContentResult(imageBytes, "image/jpeg"); // Измените тип контента в зависимости от типа изображения
+        var dish = _dishRepository.GetDish(id) ?? throw new ArgumentException("dish is null");
+
+        return await _imageService.GetImage(dish, _webHostEnvironment.WebRootPath);
     }
 }
