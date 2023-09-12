@@ -73,8 +73,17 @@ public class AuthService : IAuthService
         {
             Email = email
         };
-        _userRepository.Register(user, password);
+        await _userRepository.Register(user, password);
         return user;
+    }
+
+    public async Task ChangePassword(UserChangePasswordDto dto)
+    {
+        if (dto?.Id == null) return;
+        
+        var user = _userRepository.GetUser(dto.Id);
+
+        await _userRepository.ChangePassword(user, dto.Password);
     }
 
     public async Task<IActionResult> RegisterClient(UserRegisterDto dto)

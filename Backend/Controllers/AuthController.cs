@@ -27,4 +27,8 @@ public class AuthController : ControllerBase
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register(UserRegisterDto dto) => await _authService.RegisterClient(dto);
+
+    [HttpPut]
+    [Route("change-password")]
+    public async Task ChangePassword(UserChangePasswordDto dto) => await _authService.ChangePassword(dto);
 }

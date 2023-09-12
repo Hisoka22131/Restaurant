@@ -1,7 +1,7 @@
 <div class="row mb-5">
   <div class="col-8">
     <div class="card">
-      <div class="card-header"><h3>Блюда №{{dish.id}}</h3></div>
+      <div class="card-header"><h3>Блюдо №{{dish.id}}</h3></div>
       <div class="card-body">
         <form [formGroup]="dishForm">
           <div>
@@ -36,17 +36,23 @@
               <label for="lastName">Изображение:</label>
               <input type="file" class="form-control" (change)="onFileSelected($event)">
             </div>
-            <div class="form-group col-12">
+            <div class="form-group col-12 mt-2">
               <button [disabled]="dishForm.invalid" type="submit" class="btn btn-primary" (click)="postDish()">
                 Сохранить
               </button>
               <button [disabled]="dishForm.invalid" type="submit" class="btn btn-danger" (click)="deleteDish()" style="margin-left: 10px">
                 Удалить
               </button>
-              <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
             </div>
           </div>
         </form>
+      </div>
+      <div class="card-footer mt-2">
+        <h6 class="mb-0 bottom-word">
+          <a href="#" class="home-button text-body">
+            <i class="fas fa-long-arrow-alt-left me-2"></i>Главная
+          </a>
+        </h6>
       </div>
     </div>
   </div>

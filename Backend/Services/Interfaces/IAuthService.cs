@@ -13,4 +13,5 @@ public interface IAuthService
     Task<User> Register(string email, string password);
     Task<IActionResult> RegisterClient(UserRegisterDto dto);
     Task<string> CreateToken(User user);
+    Task ChangePassword(UserChangePasswordDto dto);
 }

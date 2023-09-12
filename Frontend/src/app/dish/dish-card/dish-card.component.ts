@@ -24,7 +24,11 @@ export class DishCardComponent implements OnInit {
 
     if (!this.dish.id) return;
 
-    this.imageService.getImage(this.dish.id).subscribe((data: Blob) => {
+    this.getImage(this.dish.id);
+  }
+
+  getImage(id: number) {
+    this.imageService.getImage(id).subscribe((data: Blob) => {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageSrc = reader.result as string;

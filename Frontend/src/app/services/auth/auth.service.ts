@@ -48,6 +48,15 @@ export class AuthService {
     return this.http.post(this.baseApiUrl + '/auth/logout', {});
   }
 
+  changePassword(password: any){
+    let user = {
+      id: this.getUserId(),
+      password: password
+    }
+
+    return this.http.put(this.baseApiUrl + "/auth/change-password", user)
+  }
+
   deleteUserInCookie(){
     this.isAuth = false;
     this.cookieService.delete("userId");

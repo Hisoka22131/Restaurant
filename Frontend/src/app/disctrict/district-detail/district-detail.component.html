@@ -5,7 +5,7 @@
       <div class="card-body">
         <form [formGroup]="districtForm">
           <div>
-            <div class="form-group col-12">
+            <div class="form-group col-12 mb-2">
               <label for="firstName">Название:</label>
               <input id="firstName" type="text" class="form-control" formControlName="name"
                      [ngClass]="{ 'is-invalid': formService.isEmpty(districtForm.get('name')) }"/>
@@ -15,19 +15,23 @@
                 </div>
               </div>
             </div>
-            <div class="form-group col-12">
-              <button [disabled]="districtForm.invalid" type="submit" class="btn btn-primary" (click)="postDistrict()">
+            <div class="form-group col-12 mb-2">
+              <button [disabled]="districtForm.invalid" type="submit" class="btn btn-primary" (click)="postDistrict()" style="margin-right: 10px">
                 Сохранить
               </button>
-              <a href="#" type="reset" class="btn btn-link m-2">Вернуться на главную</a>
-            </div>
-            <div class="form-group col-12">
               <button [disabled]="districtForm.invalid" type="submit" class="btn btn-danger" (click)="deleteDistrict()">
                 Удалить
               </button>
             </div>
           </div>
         </form>
+      </div>
+      <div class="card-footer">
+        <h6 class="mb-0 bottom-word">
+          <a href="#" class="home-button text-body">
+            <i class="fas fa-long-arrow-alt-left me-2"></i>Главная
+          </a>
+        </h6>
       </div>
     </div>
   </div>

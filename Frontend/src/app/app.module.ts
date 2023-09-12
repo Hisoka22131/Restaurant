@@ -35,9 +35,9 @@ import {OrderListComponent} from './order/order-list/order-list.component';
 import {HttpErrorInterceptorService} from "./services/http-error-interceptor.service";
 import {LoginFormComponent} from './login-register/login-form/login-form.component';
 import {RegisterFormComponent} from './login-register/register-form/register-form.component';
-import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { CreateDeliveryManModalComponent } from './deliveryman/create-delivery-man-modal/create-delivery-man-modal.component';
 import {ImageService} from "./services/image/image.service";
+import { UserSettingsComponent } from './user/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import {ImageService} from "./services/image/image.service";
     OrderListComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    CreateDeliveryManModalComponent
+    CreateDeliveryManModalComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
